@@ -265,6 +265,7 @@
                 display: block !important;
                 font-size: 1.1rem !important;
                 white-space: nowrap !important;
+                color: var(--text-dark) !important;
             }
 
             .nav-links {
@@ -289,9 +290,14 @@
                 overflow-y: auto;
             }
 
+            .nav-links.mobile-open a {
+                color: var(--text-light) !important;
+            }
+
             .mobile-menu-icon {
                 display: block !important;
                 font-size: 1.5rem !important;
+                color: var(--text-dark) !important;
             }
 
             @keyframes slideDown {
@@ -332,7 +338,7 @@
         .mobile-menu-icon {
             display: none;
             font-size: 1.8rem;
-            color: var(--text-light);
+            color: var(--text-dark);
             cursor: pointer;
             font-weight: 300;
             transition: all 0.3s ease;
