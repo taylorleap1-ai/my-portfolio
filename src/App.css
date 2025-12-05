@@ -1,38 +1,211 @@
-.App {
-  text-align: center;
+/* =====================================================
+   TAYLOR LEAP PORTFOLIO - GLOBAL STYLES
+   Retro Liminal Space - The Backrooms Aesthetic
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
+/* CSS Variables - Retro Liminal Palette */
+:root {
+  /* Colors - Muted, nostalgic, uncanny */
+  --bg-dark: #FFFACD;
+  --text-light: #2C2C2C;
+  --primary-pink: #D4A574;
+  --primary-cyan: #B8A090;
+  
+  /* Fonts */
+  --font-heading: 'Courier Prime', monospace;
+  --font-body: 'Courier Prime', monospace;
+  --font-name: 'Courier Prime', monospace;
 }
 
-.App-logo {
-  height: 40vmin;
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Hide default cursor */
+body * {
+  cursor: auto;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =====================================================
+   CUSTOM CURSOR
+   ===================================================== */
+.custom-cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background-color: #8B8680;
+  border: 1px solid #6B6B6B;
+  border-radius: 50%;
   pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.1s ease;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* =====================================================
+   HEADER & NAVIGATION
+   ===================================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: var(--bg-dark);
+  border-bottom: 2px solid #8B8680;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 100;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.home-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.home-button:hover .logo {
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.home-button:active .logo {
+  transform: scale(0.98);
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2C2C2C;
+  letter-spacing: 0.05em;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+/* Menu Toggle Button */
+.menu-toggle {
+  background: none;
+  border: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 101;
+  padding: 8px;
 }
 
-.App-link {
-  color: #61dafb;
+.menu-toggle span {
+  width: 24px;
+  height: 2px;
+  background-color: #2C2C2C;
+  transition: all 0.3s ease;
+  display: block;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* =====================================================
+   PAGE CONTAINER
+   ===================================================== */
+.page-container {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 60px;
+  background-color: var(--bg-dark);
+  position: relative;
+}
+
+/* =====================================================
+   PAGE HEADER (for all pages)
+   ===================================================== */
+.page-header {
+  text-align: center;
+  padding: 3rem 2rem 2rem;
+}
+
+.page-header h1 {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  color: var(--text-light);
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3), -1px -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.header-line {
+  width: 100px;
+  height: 2px;
+  background: #8B8680;
+  margin: 0 auto;
+}
+
+/* =====================================================
+   LINKS & GENERAL
+   ===================================================== */
+a {
+  color: #6B6B6B;
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #2C2C2C;
+  text-decoration: underline wavy;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 768px) {
+  .header {
+    padding: 0 1rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .page-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .custom-cursor {
+    display: none;
   }
 }

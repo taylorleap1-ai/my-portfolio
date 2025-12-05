@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Taylor Leap</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn more about Taylor Leap - 3D Modeler, VFX Artist, and Motion Designer.">
+    <meta name="author" content="Taylor Leap">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="About Me - Taylor Leap">
+    <meta property="og:description" content="From a young age, I have always been drawn to drawing and animation.">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎨</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        @font-face {
+            font-family: 'Cubao Wide';
+            src: url('assets/fonts/CubaoFree2-UltraExpanded.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Sprite Graffiti';
+            src: url('assets/fonts/Sprite-Graffiti/SpriteGraffiti/Commercial/TTF/SpriteGraffiti-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --dark-bg: #242424;
+            --light-bg: #FBF5F3;
+            --accent-red: #D7263D;
+            --text-dark: #242424;
+            --text-light: #FBF5F3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-bg);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: var(--light-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 3rem;
+            z-index: 100;
+            border-bottom: 1px solid rgba(36, 36, 36, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--text-dark);
+            font-family: 'Cubao Wide', Impact, 'Arial Black', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-red);
+        }
+
+        .resume-btn {
+            background: var(--accent-red);
+            color: #fbf5f3 !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(215, 38, 61, 0.3);
+        }
+
+        .resume-btn:hover {
+            background: #b81e2f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(215, 38, 61, 0.4);
+        }
+
+        /* Main Content */
+        .about-page {
+            margin-top: 70px;
+            min-height: 100vh;
+            padding: 6rem 3rem;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: stretch;
+        }
+
+        .about-image-wrapper {
+            display: flex;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            object-fit: cover;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .about-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #999;
+            font-weight: 300;
+            letter-spacing: 3px;
+            font-family: 'Cubao Wide', Impact, 'Arial Black', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .contact-email {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .contact-email:hover {
+            color: var(--accent-red);
+        }
+
+        .resume-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--text-dark);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .resume-button:hover {
+            background: var(--accent-red);
+            color: var(--light-bg);
+            border-color: var(--accent-red);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(215, 38, 61, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image {
+                max-height: 500px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .about-text {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 0 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.75rem;
+            }
+
+            .about-page {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .about-text {
+                font-size: 0.95rem;
+            }
+
+            .resume-button {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-logo">TAYLOR LEAP</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#demo">Demo Reel</a></li>
+            <li><a href="3d.html">3D</a></li>
+            <li><a href="#vfx">VFX</a></li>
+            <li><a href="#concept">Concept</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="assets/documents/Resume/Taylor Leap Resume.pdf" class="resume-btn" download>Resume</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Page Content -->
+    <section class="about-page">
+        <div class="about-container">
+            <!-- Left Column - Image -->
+            <div class="about-image-wrapper">
+                <img src="assets/images/IMG_20250528_185056_575.webp" alt="Taylor Leap - 3D Modeler, VFX Artist, Motion Designer" class="about-image" width="600" height="800" loading="eager">
+            </div>
+
+            <!-- Right Column - Content -->
+            <div class="about-content">
+                <!-- About Me Section -->
+                <div class="about-section">
+                    <h2 class="section-title">ABOUT ME</h2>
+                    <p class="about-text">
+                        From a young age, I have always been drawn to drawing and animation as my chosen medium, as I loved being taken into these movies and series and being able to understand and view the world through the lens of the people who created them. Since then, I have always known that is what I wanted to do. I hope to work on anything that I can get my hands on that can give people the same feelings I had when I interacted with those worlds, whether that be through big screen movies, TV series, or video games.
+                    </p>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="about-section">
+                    <h2 class="section-title">CONTACT</h2>
+                    <a href="mailto:taylorleap1@gmail.com" class="contact-email">taylorleap1@gmail.com</a>
+                </div>
+
+                <!-- Resume Button -->
+                <div class="about-section">
+                    <a href="assets/documents/Resume/Taylor Leap Resume.pdf" class="resume-button" download>RESUME</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

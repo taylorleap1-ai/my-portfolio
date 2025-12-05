@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept Art - Taylor Leap</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explore Taylor Leap's concept art portfolio including character designs, environment art, and more.">
+    <meta name="author" content="Taylor Leap">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Concept Art - Taylor Leap">
+    <meta property="og:description" content="Explore concept art and creative designs.">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎨</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        @font-face {
+            font-family: 'Cubao Wide';
+            src: url('assets/fonts/CubaoFree2-UltraExpanded.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Sprite Graffiti';
+            src: url('assets/fonts/Sprite-Graffiti/SpriteGraffiti/Commercial/TTF/SpriteGraffiti-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --dark-bg: #242424;
+            --light-bg: #FBF5F3;
+            --accent-red: #D7263D;
+            --text-dark: #242424;
+            --text-light: #FBF5F3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 6rem);
+            max-width: 1400px;
+            height: 70px;
+            background: var(--dark-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 3rem;
+            z-index: 100;
+            border-radius: 0 0 35px 35px;
+            border-bottom: 1px solid rgba(251, 245, 243, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            font-family: 'Cubao Wide', Impact, 'Arial Black', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-red);
+        }
+
+        .resume-btn {
+            background: var(--accent-red);
+            color: #fbf5f3 !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(215, 38, 61, 0.3);
+        }
+
+        .resume-btn:hover {
+            background: #b81e2f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(215, 38, 61, 0.4);
+        }
+
+        /* Main Content */
+        .concept-page {
+            margin-top: 70px;
+            min-height: 100vh;
+            padding: 6rem 3rem;
+        }
+
+        .concept-title {
+            font-size: 4rem;
+            text-align: center;
+            color: var(--accent-red);
+            margin-bottom: 4rem;
+            font-weight: normal;
+            letter-spacing: 6px;
+            font-family: 'Cubao Wide', Impact, 'Arial Black', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1px solid rgba(251, 245, 243, 0.08);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        }
+
+        .concept-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(
+                135deg,
+                rgba(215, 38, 61, 0.3) 0%,
+                rgba(251, 245, 243, 0.1) 50%,
+                rgba(215, 38, 61, 0.3) 100%
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .concept-card:hover::before {
+            opacity: 1;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(215, 38, 61, 0.2);
+        }
+
+        .concept-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .concept-card:hover .concept-image {
+            transform: scale(1.05);
+        }
+
+        .concept-info {
+            padding: 1.5rem;
+        }
+
+        .concept-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .concept-type {
+            font-size: 0.85rem;
+            color: rgba(251, 245, 243, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 2rem;
+            color: var(--text-light);
+            cursor: pointer;
+            background: rgba(36, 36, 36, 0.8);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(251, 245, 243, 0.2);
+        }
+
+        .lightbox-close:hover {
+            background: var(--accent-red);
+            transform: rotate(90deg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 0 1.5rem;
+            }
+
+            .concept-page {
+                padding: 4rem 1.5rem;
+            }
+
+            .concept-title {
+                font-size: 2.5rem;
+            }
+
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                display: none;
+            }
+
+            .concept-title {
+                font-size: 2rem;
+                letter-spacing: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-logo">TAYLOR LEAP</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#demo">Demo Reel</a></li>
+            <li><a href="3d.html">3D</a></li>
+            <li><a href="vfx.html">VFX</a></li>
+            <li><a href="concept.html">Concept</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="assets/documents/Resume/Taylor Leap Resume.pdf" class="resume-btn" download>Resume</a></li>
+        </ul>
+    </nav>
+
+    <!-- Concept Art Page Content -->
+    <section class="concept-page">
+        <h1 class="concept-title">CONCEPT ART</h1>
+        
+        <div class="concept-grid">
+            <!-- Character Design 1 -->
+            <div class="concept-card" onclick="openLightbox('assets/images/concept-art/annotated-LeapT_CharacterDesign_version231.png.jpg')">
+                <img src="assets/images/concept-art/annotated-LeapT_CharacterDesign_version231.png.jpg" alt="Character Design" class="concept-image" loading="lazy" width="350" height="350">
+                <div class="concept-info">
+                    <h3 class="concept-name">Character Design</h3>
+                    <p class="concept-type">Character Art</p>
+                </div>
+            </div>
+
+            <!-- Environment Design -->
+            <div class="concept-card" onclick="openLightbox('assets/images/concept-art/annotated-LeapT_EnvironmentDesign_version231.png_page-0001.jpg')">
+                <img src="assets/images/concept-art/annotated-LeapT_EnvironmentDesign_version231.png_page-0001.jpg" alt="Environment Design" class="concept-image" loading="lazy" width="350" height="350">
+                <div class="concept-info">
+                    <h3 class="concept-name">Environment Design</h3>
+                    <p class="concept-type">Environment Art</p>
+                </div>
+            </div>
+
+            <!-- Logo Design -->
+            <div class="concept-card" onclick="openLightbox('assets/images/concept-art/annotated-LeapT_LogoDesign_1.png_page-0001.jpg')">
+                <img src="assets/images/concept-art/annotated-LeapT_LogoDesign_1.png_page-0001.jpg" alt="Logo Design" class="concept-image" loading="lazy" width="350" height="350">
+                <div class="concept-info">
+                    <h3 class="concept-name">Logo Design</h3>
+                    <p class="concept-type">Branding</p>
+                </div>
+            </div>
+
+            <!-- Character Turnaround 1 -->
+            <div class="concept-card" onclick="openLightbox('assets/images/concept-art/annotated-LeapT_Turnaround_Version232.jpg_page-0001.jpg')">
+                <img src="assets/images/concept-art/annotated-LeapT_Turnaround_Version232.jpg_page-0001.jpg" alt="Character Turnaround" class="concept-image" loading="lazy" width="350" height="350">
+                <div class="concept-info">
+                    <h3 class="concept-name">Character Turnaround</h3>
+                    <p class="concept-type">Character Art</p>
+                </div>
+            </div>
+
+            <!-- The Renovator Character Design -->
+            <div class="concept-card" onclick="openLightbox('assets/images/concept-art/annotated-TheRenovatorCharacterDesign.png_page-0001.jpg')">
+                <img src="assets/images/concept-art/annotated-TheRenovatorCharacterDesign.png_page-0001.jpg" alt="The Renovator Character Design" class="concept-image" loading="lazy" width="350" height="350">
+                <div class="concept-info">
+                    <h3 class="concept-name">The Renovator</h3>
+                    <p class="concept-type">Character Design</p>
+                </div>
+            </div>
+
+            <!-- Character Turnaround 2 -->
+            <div class="concept-card" onclick="openLightbox('assets/images/concept-art/annotated-Turnaround20Template_2023_TaylorLeap_ver1.png (1)_page-0001.jpg')">
+                <img src="assets/images/concept-art/annotated-Turnaround20Template_2023_TaylorLeap_ver1.png (1)_page-0001.jpg" alt="Character Turnaround Template" class="concept-image" loading="lazy" width="350" height="350">
+                <div class="concept-info">
+                    <h3 class="concept-name">Character Turnaround</h3>
+                    <p class="concept-type">Character Art</p>
+                </div>
+            </div>
+
+            <!-- Character Rig -->
+            <div class="concept-card" onclick="openLightbox('assets/images/concept-art/CharacterRig.jpg')">
+                <img src="assets/images/concept-art/CharacterRig.jpg" alt="Character Rig" class="concept-image" loading="lazy" width="350" height="350">
+                <div class="concept-info">
+                    <h3 class="concept-name">Character Rig</h3>
+                    <p class="concept-type">Technical Art</p>
+                </div>
+            </div>
+
+            <!-- InterMart Girl Turnaround -->
+            <div class="concept-card" onclick="openLightbox('assets/images/concept-art/InterMart Girl Turnaround1.png')">
+                <img src="assets/images/concept-art/InterMart Girl Turnaround1.png" alt="InterMart Girl Turnaround" class="concept-image" loading="lazy" width="350" height="350">
+                <div class="concept-info">
+                    <h3 class="concept-name">InterMart Girl</h3>
+                    <p class="concept-type">Character Art</p>
+                </div>
+            </div>
+
+            <!-- InterMart Storyboard -->
+            <div class="concept-card" onclick="openLightbox('assets/images/concept-art/InterMart_Version2-board-00006.png')">
+                <img src="assets/images/concept-art/InterMart_Version2-board-00006.png" alt="InterMart Storyboard" class="concept-image" loading="lazy" width="350" height="350">
+                <div class="concept-info">
+                    <h3 class="concept-name">InterMart Storyboard</h3>
+                    <p class="concept-type">Storyboard</p>
+                </div>
+            </div>
+
+            <!-- Monster Design -->
+            <div class="concept-card" onclick="openLightbox('public/Concept Art/LeapT_monster (1).jpg')">
+                <img src="public/Concept Art/LeapT_monster (1).jpg" alt="Monster Design" class="concept-image" loading="lazy" width="350" height="350">
+                <div class="concept-info">
+                    <h3 class="concept-name">Monster Design</h3>
+                    <p class="concept-type">Creature Design</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Concept Art Full View" class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script>
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imageSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>

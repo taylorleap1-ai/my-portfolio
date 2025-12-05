@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Models - Taylor Leap</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explore Taylor Leap's 3D modeling portfolio with interactive model viewer.">
+    <meta name="author" content="Taylor Leap">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="3D Models - Taylor Leap">
+    <meta property="og:description" content="Explore interactive 3D models and creative work.">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎨</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        @font-face {
+            font-family: 'Cubao Wide';
+            src: url('assets/fonts/CubaoFree2-UltraExpanded.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Sprite Graffiti';
+            src: url('assets/fonts/Sprite-Graffiti/SpriteGraffiti/Commercial/TTF/SpriteGraffiti-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --dark-bg: #242424;
+            --light-bg: #FBF5F3;
+            --accent-red: #D7263D;
+            --text-dark: #242424;
+            --text-light: #FBF5F3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 6rem);
+            max-width: 1400px;
+            height: 70px;
+            background: var(--dark-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 3rem;
+            z-index: 100;
+            border-radius: 0 0 35px 35px;
+            border-bottom: 1px solid rgba(251, 245, 243, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            font-family: 'Cubao Wide', Impact, 'Arial Black', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-red);
+        }
+
+        .resume-btn {
+            background: var(--accent-red);
+            color: #fbf5f3 !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(215, 38, 61, 0.3);
+        }
+
+        .resume-btn:hover {
+            background: #b81e2f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(215, 38, 61, 0.4);
+        }
+
+        /* Main Content */
+        .threed-page {
+            margin-top: 70px;
+            min-height: 100vh;
+            padding: 6rem 3rem;
+        }
+
+        .threed-title {
+            font-size: 4rem;
+            text-align: center;
+            color: var(--accent-red);
+            margin-bottom: 4rem;
+            font-weight: normal;
+            letter-spacing: 6px;
+            font-family: 'Cubao Wide', Impact, 'Arial Black', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .model-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+            border-radius: 16px;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(251, 245, 243, 0.08);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(
+                135deg,
+                rgba(251, 245, 243, 0.12) 0%,
+                rgba(251, 245, 243, 0.04) 50%,
+                rgba(251, 245, 243, 0) 100%
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .model-card:hover::before {
+            opacity: 1;
+        }
+
+        .model-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(215, 38, 61, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(215, 38, 61, 0.1);
+        }
+
+        .model-card:focus-visible {
+            outline: 2px solid var(--accent-red);
+            outline-offset: 3px;
+        }
+
+        .model-preview {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .model-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .preview-placeholder {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            position: absolute;
+            top: 1.5rem;
+            z-index: 3;
+            background: rgba(215, 38, 61, 0.9);
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(215, 38, 61, 0.3);
+        }
+
+        .model-card:hover .preview-placeholder {
+            background: rgba(215, 38, 61, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(215, 38, 61, 0.4);
+        }
+
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(251, 245, 243, 0.1);
+            border-top-color: var(--accent-red);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            z-index: 4;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .model-preview.loading .loading-spinner {
+            display: block;
+        }
+
+        .model-preview.loading .preview-placeholder {
+            opacity: 0.5;
+        }
+
+        .preview-thumbnail {
+            width: 100%;
+            height: 100%;
+        }
+
+        .preview-thumbnail model-viewer {
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .model-title {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+            margin: 0;
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            transition: color 0.3s ease;
+            position: relative;
+            z-index: 3;
+        }
+
+        .model-card:hover .model-title {
+            color: var(--accent-red);
+        }
+
+        .global-spotlight {
+            display: none;
+        }
+
+        .particle {
+            display: none;
+        }
+
+        /* Modal */
+        .model-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(36, 36, 36, 0.97);
+            backdrop-filter: blur(20px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .model-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+            border-radius: 16px;
+            padding: 0;
+            position: relative;
+            max-width: 92vw;
+            max-height: 92vh;
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.4),
+                0 1px 3px rgba(0, 0, 0, 0.12);
+            animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+            border: 1px solid rgba(251, 245, 243, 0.08);
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(
+                135deg,
+                rgba(251, 245, 243, 0.12) 0%,
+                rgba(251, 245, 243, 0.04) 50%,
+                rgba(251, 245, 243, 0) 100%
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .modal-inner {
+            padding: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--accent-red);
+            color: var(--text-light);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(215, 38, 61, 0.3);
+        }
+
+        .modal-close:hover {
+            background: #B01E31;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(215, 38, 61, 0.4);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+            margin: 0 0 1.5rem 0;
+            text-align: left;
+            padding-right: 3rem;
+        }
+
+        .viewer-container {
+            width: 800px;
+            height: 600px;
+            max-width: calc(90vw - 5rem);
+            max-height: calc(90vh - 12rem);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            box-shadow: 
+                inset 0 1px 2px rgba(0, 0, 0, 0.3),
+                0 2px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            border: 1px solid rgba(251, 245, 243, 0.06);
+            position: relative;
+        }
+
+        .viewer-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .viewer-loading .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border-width: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .viewer-loading-text {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .viewer-container::before {
+            display: none;
+        }
+
+        .viewer-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            transition: opacity 0.3s ease;
+        }
+
+        .viewer-loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .viewer-loading .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border-width: 4px;
+            position: relative;
+            left: 0;
+            top: 0;
+            transform: none;
+            display: block;
+            margin: 0 auto 1rem;
+        }
+
+        .viewer-loading-text {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .viewer-wrapper {
+            width: 100%;
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        .viewer-controls-hint {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(215, 38, 61, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(215, 38, 61, 0.2);
+        }
+
+        .control-icon {
+            font-size: 1.2rem;
+        }
+
+        .control-text {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.9;
+        }
+
+        .viewer-actions {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: rgba(26, 26, 26, 0.6);
+            border-radius: 12px;
+            border: 1px solid rgba(251, 245, 243, 0.06);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .action-btn {
+            background: var(--accent-red);
+            color: var(--text-light);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(215, 38, 61, 0.25);
+        }
+
+        .action-btn::before {
+            display: none;
+        }
+
+        .action-btn:hover {
+            background: #B01E31;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(215, 38, 61, 0.35);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(215, 38, 61, 0.3);
+        }
+
+        .action-btn:focus-visible {
+            outline: 2px solid var(--text-light);
+            outline-offset: 2px;
+        }
+
+        .action-btn:focus-visible {
+            outline: 2px solid var(--accent-red);
+            outline-offset: 2px;
+        }
+
+        .action-btn.liked {
+            background: var(--accent-red);
+            animation: heartBeat 0.3s ease;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(0.95); }
+        }
+
+        .progress-bar {
+            display: block;
+            width: calc(100% - 60px);
+            height: 2px;
+            background: rgba(251, 245, 243, 0.1);
+            border-radius: 2px;
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+        }
+
+        .update-bar {
+            background: var(--accent-red);
+            width: 0%;
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px rgba(215, 38, 61, 0.5);
+        }
+
+        .update-bar::after {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 0 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .threed-page {
+                padding: 4rem 1.5rem;
+            }
+
+            .threed-title {
+                font-size: 2.5rem;
+            }
+
+            .models-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .modal-content {
+                padding: 0;
+                max-width: 95vw;
+                max-height: 95vh;
+            }
+
+            .modal-inner {
+                padding: 1rem;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .viewer-container {
+                width: 100%;
+                height: 400px;
+            }
+
+            .viewer-actions {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .action-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .viewer-controls-hint {
+                font-size: 0.75rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .control-icon {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-logo">TAYLOR LEAP</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#demo">Demo Reel</a></li>
+            <li><a href="3d.html">3D</a></li>
+            <li><a href="vfx.html">VFX</a></li>
+            <li><a href="concept.html">Concept</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="assets/documents/Resume/Taylor Leap Resume.pdf" class="resume-btn" download>Resume</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="threed-page">
+        <h1 class="threed-title">3D MODELS</h1>
+        
+        <div class="models-grid">
+            <div class="model-card" onclick="openModel('Ghost Can', 'assets/models/GhostCan.glb')" tabindex="0" role="button" aria-label="View Ghost Can 3D model">
+                <div class="model-preview">
+                    <div class="loading-spinner"></div>
+                    <div class="preview-placeholder">Click to View</div>
+                    <div class="preview-thumbnail">
+                        <model-viewer src="assets/models/GhostCan.glb" auto-rotate camera-controls touch-action="none" disable-zoom loading="lazy" alt="Ghost Can 3D model preview"></model-viewer>
+                    </div>
+                </div>
+                <h3 class="model-title">Ghost Can</h3>
+            </div>
+
+            <div class="model-card" onclick="openModel('Model Placeholder 1', 'assets/models/placeholder1.glb')" tabindex="0" role="button" aria-label="View Model Placeholder 1 3D model">
+                <div class="model-preview">
+                    <div class="loading-spinner"></div>
+                    <div class="preview-placeholder">Coming Soon</div>
+                    <div class="preview-thumbnail">
+                        <!-- Add your model file here: assets/models/placeholder1.glb -->
+                    </div>
+                </div>
+                <h3 class="model-title">Model Placeholder 1</h3>
+            </div>
+
+            <div class="model-card" onclick="openModel('The Renovator', 'assets/models/TheRenovator.glb')" tabindex="0" role="button" aria-label="View The Renovator 3D model">
+                <div class="model-preview">
+                    <div class="loading-spinner"></div>
+                    <div class="preview-placeholder">Click to View</div>
+                    <div class="preview-thumbnail">
+                        <model-viewer src="assets/models/TheRenovator.glb" auto-rotate camera-controls touch-action="none" disable-zoom loading="lazy" alt="The Renovator 3D model preview"></model-viewer>
+                    </div>
+                </div>
+                <h3 class="model-title">The Renovator</h3>
+            </div>
+
+            <div class="model-card" onclick="openModel('Model Placeholder 2', 'assets/models/placeholder2.glb')" tabindex="0" role="button" aria-label="View Model Placeholder 2 3D model">
+                <div class="model-preview">
+                    <div class="loading-spinner"></div>
+                    <div class="preview-placeholder">Coming Soon</div>
+                    <div class="preview-thumbnail">
+                        <!-- Add your model file here: assets/models/placeholder2.glb -->
+                    </div>
+                </div>
+                <h3 class="model-title">Model Placeholder 2</h3>
+            </div>
+
+            <div class="model-card" onclick="openModel('Model Placeholder 3', 'assets/models/placeholder3.glb')" tabindex="0" role="button" aria-label="View Model Placeholder 3 3D model">
+                <div class="model-preview">
+                    <div class="loading-spinner"></div>
+                    <div class="preview-placeholder">Coming Soon</div>
+                    <div class="preview-thumbnail">
+                        <!-- Add your model file here: assets/models/placeholder3.glb -->
+                    </div>
+                </div>
+                <h3 class="model-title">Model Placeholder 3</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="model-modal" id="modelModal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-inner">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <h2 class="modal-title" id="modalTitle">Model Name</h2>
+                <div class="viewer-wrapper">
+                    <div class="viewer-controls-hint">
+                        <span class="control-icon">🖱️</span>
+                        <span class="control-text">Left Click Drag to rotate • Scroll to zoom • Right Click Drag to pan</span>
+                    </div>
+                    <div class="viewer-actions">
+                        <button class="action-btn" onclick="resetCamera()" title="Reset View" aria-label="Reset camera view">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                            </svg>
+                        </button>
+                        <button class="action-btn" onclick="toggleAutoRotate()" title="Toggle Rotation" id="rotateBtn" aria-label="Toggle auto rotation">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+                            </svg>
+                        </button>
+                        <button class="action-btn" onclick="toggleLike()" title="Like" id="likeBtn" aria-label="Like this model">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="viewer-container">
+                        <div class="viewer-loading" id="viewerLoading">
+                            <div class="loading-spinner"></div>
+                            <div class="viewer-loading-text">Loading Model...</div>
+                        </div>
+                        <model-viewer id="modelViewer"
+                            style="width: 100%; height: 100%;"
+                            camera-controls
+                            touch-action="pan-y"
+                            auto-rotate
+                            auto-rotate-delay="1000"
+                            shadow-intensity="1.2"
+                            exposure="1"
+                            environment-image="neutral"
+                            camera-orbit="0deg 75deg 105%"
+                            min-camera-orbit="auto auto 5%"
+                            max-camera-orbit="auto auto 200%"
+                            interaction-prompt="none"
+                            loading="eager"
+                            reveal="auto">
+                            <div class="progress-bar" slot="progress-bar">
+                                <div class="update-bar"></div>
+                            </div>
+                            <div slot="poster" style="background: #242424; display: flex; align-items: center; justify-content: center; color: #FBF5F3;">
+                                Loading model...
+                            </div>
+                        </model-viewer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Model Viewer Script -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+
+    <script>
+        let autoRotateEnabled = true;
+        let isLiked = false;
+
+        // Show/hide loading indicator
+        function showLoading() {
+            const loading = document.getElementById('viewerLoading');
+            if (loading) loading.classList.remove('hidden');
+        }
+
+        function hideLoading() {
+            const loading = document.getElementById('viewerLoading');
+            if (loading) loading.classList.add('hidden');
+        }
+
+        // Handle thumbnail loading states
+        document.addEventListener('DOMContentLoaded', function() {
+            const thumbnails = document.querySelectorAll('.preview-thumbnail model-viewer');
+            thumbnails.forEach(viewer => {
+                const preview = viewer.closest('.model-preview');
+                
+                viewer.addEventListener('load', function() {
+                    preview.classList.remove('loading');
+                });
+                
+                viewer.addEventListener('error', function() {
+                    preview.classList.remove('loading');
+                });
+                
+                // Set initial loading state
+                preview.classList.add('loading');
+            });
+        });
+
+        function openModel(name, path) {
+            const modal = document.getElementById('modelModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modelViewer = document.getElementById('modelViewer');
+            
+            console.log('Opening model:', name, 'Path:', path);
+            
+            modalTitle.textContent = name;
+            showLoading();
+            modelViewer.setAttribute('src', path);
+            modal.classList.add('active');
+            autoRotateEnabled = true;
+            isLiked = false;
+            document.getElementById('rotateBtn').innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+            document.getElementById('likeBtn').innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+            document.getElementById('likeBtn').classList.remove('liked');
+            
+            // Remove old event listeners and add new ones
+            const newViewer = modelViewer.cloneNode(true);
+            modelViewer.parentNode.replaceChild(newViewer, modelViewer);
+            
+            newViewer.addEventListener('load', function() {
+                console.log('Model loaded successfully:', path);
+                hideLoading();
+            });
+            
+            newViewer.addEventListener('error', function(event) {
+                console.warn('Model may not have loaded correctly:', path);
+                console.warn('OBJ files require MTL material files to display properly');
+                hideLoading();
+            });
+            
+            // Update references
+            document.getElementById('modelViewer').setAttribute('id', 'modelViewer');
+        }
+
+        function closeModal(event) {
+            const modal = document.getElementById('modelModal');
+            if (!event || event.target === modal || event.target.classList.contains('modal-close')) {
+                modal.classList.remove('active');
+                const modelViewer = document.getElementById('modelViewer');
+                modelViewer.removeAttribute('src');
+            }
+        }
+
+        function resetCamera() {
+            const modelViewer = document.getElementById('modelViewer');
+            modelViewer.cameraOrbit = '0deg 75deg 105%';
+            modelViewer.fieldOfView = '45deg';
+        }
+
+        function toggleAutoRotate() {
+            const modelViewer = document.getElementById('modelViewer');
+            const rotateBtn = document.getElementById('rotateBtn');
+            autoRotateEnabled = !autoRotateEnabled;
+            
+            if (autoRotateEnabled) {
+                modelViewer.setAttribute('auto-rotate', '');
+                rotateBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+            } else {
+                modelViewer.removeAttribute('auto-rotate');
+                rotateBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+            }
+        }
+
+        function toggleLike() {
+            const likeBtn = document.getElementById('likeBtn');
+            isLiked = !isLiked;
+            
+            if (isLiked) {
+                likeBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+                likeBtn.classList.add('liked');
+            } else {
+                likeBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+                likeBtn.classList.remove('liked');
+            }
+        }
+
+        function takeScreenshot() {
+            const modelViewer = document.getElementById('modelViewer');
+            const modalTitle = document.getElementById('modalTitle').textContent;
+            
+            modelViewer.toBlob({ idealAspect: true }).then(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${modalTitle.replace(/\s+/g, '_')}.png`;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            const modal = document.getElementById('modelModal');
+            
+            if (event.key === 'Escape') {
+                closeModal();
+                return;
+            }
+            
+            // Keyboard navigation only when modal is open
+            if (!modal.classList.contains('active')) return;
+            
+            const modelViewer = document.getElementById('modelViewer');
+            if (!modelViewer) return;
+            
+            const orbitString = modelViewer.getCameraOrbit();
+            const orbit = {
+                theta: parseFloat(orbitString.theta) || 0,
+                phi: parseFloat(orbitString.phi) || 75,
+                radius: parseFloat(orbitString.radius) || 105
+            };
+            
+            switch(event.key) {
+                case 'ArrowLeft':
+                    event.preventDefault();
+                    orbit.theta -= 10;
+                    modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius}%`;
+                    break;
+                case 'ArrowRight':
+                    event.preventDefault();
+                    orbit.theta += 10;
+                    modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius}%`;
+                    break;
+                case 'ArrowUp':
+                    event.preventDefault();
+                    orbit.phi = Math.max(0, orbit.phi - 10);
+                    modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius}%`;
+                    break;
+                case 'ArrowDown':
+                    event.preventDefault();
+                    orbit.phi = Math.min(180, orbit.phi + 10);
+                    modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius}%`;
+                    break;
+                case ' ':
+                    event.preventDefault();
+                    toggleAutoRotate();
+                    break;
+                case 'r':
+                case 'R':
+                    event.preventDefault();
+                    resetCamera();
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>
