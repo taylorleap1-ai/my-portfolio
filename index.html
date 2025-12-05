@@ -457,7 +457,7 @@
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 3rem;
         }
 
@@ -1196,6 +1196,88 @@
                 right: 1rem;
                 width: 40px;
                 height: 40px;
+            }
+        }
+
+        /* Critical Mobile Fixes - Override Everything */
+        @media (max-width: 768px) {
+            * {
+                max-width: 100vw !important;
+            }
+
+            .top-nav {
+                width: 100% !important;
+                left: 0 !important;
+                right: 0 !important;
+                transform: none !important;
+                margin: 0 !important;
+            }
+
+            .nav-logo {
+                display: block !important;
+                font-size: 1.1rem !important;
+            }
+
+            .nav-links a,
+            .resume-btn {
+                display: inline-block !important;
+            }
+
+            .skills-section,
+            .contact-section,
+            .footer-section,
+            .demo-reel {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+                overflow-x: hidden !important;
+                max-width: 100vw !important;
+            }
+
+            .skills-container,
+            .contact-container,
+            .footer-container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 auto !important;
+            }
+
+            .skill-category {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            .hero-title {
+                font-size: 3.5rem !important;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+
+            .hero-subtitle {
+                font-size: 0.95rem !important;
+            }
+
+            .demo-reel {
+                margin-bottom: -2rem !important;
+            }
+
+            .demo-reel h2 {
+                margin-bottom: 2.5rem !important;
             }
         }
     </style>
