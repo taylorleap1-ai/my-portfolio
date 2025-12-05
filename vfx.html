@@ -241,6 +241,41 @@
                 padding: 0 1.5rem;
             }
 
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-icon {
+                display: block;
+            }
+
+            .nav-links.mobile-open {
+                display: flex !important;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--light-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+                z-index: 1000;
+                animation: slideDown 0.3s ease;
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
             .vfx-page {
                 padding: 4rem 1.5rem;
             }
@@ -263,10 +298,6 @@
         }
 
         @media (max-width: 480px) {
-            .nav-links {
-                display: none;
-            }
-
             .vfx-title {
                 font-size: 2rem;
                 letter-spacing: 3px;
@@ -275,6 +306,21 @@
             .construction-icon {
                 font-size: 3rem;
             }
+        }
+
+        .mobile-menu-icon {
+            display: none;
+            font-size: 1.8rem;
+            color: #242424;
+            cursor: pointer;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .mobile-menu-icon:hover {
+            color: var(--accent-red);
         }
     </style>
 </head>
@@ -292,6 +338,7 @@
             <li><a href="index.html#contact">Contact</a></li>
             <li><a href="assets/documents/Resume/Taylor Leap Resume.pdf" class="resume-btn" download>Resume</a></li>
         </ul>
+        <div class="mobile-menu-icon">☰</div>
     </nav>
 
     <!-- VFX Page Content -->
@@ -317,5 +364,35 @@
             <div class="vfx-card"></div>
         </div>
     </section>
+
+    <script>
+        // Mobile Menu Toggle
+        (function() {
+            const mobileMenuIcon = document.querySelector('.mobile-menu-icon');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuIcon && navLinks) {
+                mobileMenuIcon.addEventListener('click', function() {
+                    navLinks.classList.toggle('mobile-open');
+                    mobileMenuIcon.textContent = navLinks.classList.contains('mobile-open') ? '×' : '☰';
+                });
+
+                const links = navLinks.querySelectorAll('a');
+                links.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navLinks.classList.remove('mobile-open');
+                        mobileMenuIcon.textContent = '☰';
+                    });
+                });
+
+                document.addEventListener('click', function(event) {
+                    if (!event.target.closest('.top-nav')) {
+                        navLinks.classList.remove('mobile-open');
+                        mobileMenuIcon.textContent = '☰';
+                    }
+                });
+            }
+        })();
+    </script>
 </body>
 </html>

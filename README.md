@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# Assets Folder Structure
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This folder contains all the organized assets for the Taylor Leap portfolio website.
 
-## Available Scripts
+## Directory Structure
 
-In the project directory, you can run:
+```
+assets/
+├── images/              # All images
+│   ├── concept-art/     # Concept art gallery images
+│   ├── logos/           # Software/tool logos
+│   ├── Face.png         # Hero profile image
+│   └── *.webp, *.png    # Other images
+├── fonts/               # Custom fonts
+│   ├── CubaoFree2-UltraExpanded.ttf
+│   └── Sprite-Graffiti/
+├── models/              # 3D model files (.glb)
+│   ├── GhostCan.glb
+│   ├── TheRenovator.glb
+│   └── placeholder*.glb
+└── documents/           # PDFs and documents
+    └── Resume/
+        └── Taylor Leap Resume.pdf
+```
 
-### `npm start`
+## How to Add New Content
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Adding a New Concept Art Image
+1. Place your image in `assets/images/concept-art/`
+2. Add to `concept.html`:
+   ```html
+   <div class="concept-card" onclick="openLightbox('assets/images/concept-art/your-image.jpg')">
+       <img src="assets/images/concept-art/your-image.jpg" alt="Description" class="concept-image" loading="lazy" width="350" height="350">
+   </div>
+   ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Adding a New 3D Model
+1. Place your `.glb` file in `assets/models/`
+2. Update the placeholder card in `3d.html`:
+   ```html
+   <div class="model-card" onclick="openModel('Model Name', 'assets/models/your-model.glb')">
+       <model-viewer src="assets/models/your-model.glb" auto-rotate camera-controls></model-viewer>
+   </div>
+   ```
 
-### `npm test`
+### Adding a New Software Logo
+1. Place your logo image in `assets/images/logos/`
+2. Add to the skills section in `index.html`:
+   ```html
+   <img src="assets/images/logos/your-logo.png" alt="Software Name" loading="lazy" width="48" height="48">
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Updating Your Resume
+1. Replace the PDF in `assets/documents/Resume/`
+2. Keep the filename as `Taylor Leap Resume.pdf` (or update all references in HTML files)
 
-### `npm run build`
+## Benefits of This Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+✅ **Clean separation**: Assets are separated by type (images, fonts, models, documents)
+✅ **Easy to find**: Logical folder names make it clear where each asset belongs
+✅ **Simple updates**: Add new content without searching through nested folders
+✅ **Version control friendly**: Clear structure makes git diffs more readable
+✅ **Scalable**: Easy to add new categories as your portfolio grows
