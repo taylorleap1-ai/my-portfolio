@@ -1611,47 +1611,34 @@
             }
         })();
 
-        // Contact Form Handler with fallback
+        // Contact Form Handler - Direct mailto
         (function() {
-            const form = document.querySelector('.contact-form');
+            const form = document.getElementById('contactForm');
             
             if (form) {
                 form.addEventListener('submit', function(e) {
-                    const submitBtn = form.querySelector('.form-submit');
-                    submitBtn.textContent = 'Sending...';
-                    submitBtn.disabled = true;
+                    e.preventDefault();
                     
-                    // Set a timeout to detect if submission hangs
-                    const timeoutId = setTimeout(function() {
-                        // If form hasn't submitted after 10 seconds, use mailto fallback
-                        e.preventDefault();
-                        
-                        const firstName = form.querySelector('[name="firstName"]').value;
-                        const lastName = form.querySelector('[name="lastName"]').value;
-                        const companyName = form.querySelector('[name="companyName"]').value;
-                        const email = form.querySelector('[name="email"]').value;
-                        const message = form.querySelector('[name="message"]').value;
-                        
-                        const subject = encodeURIComponent('Portfolio Contact Form Submission');
-                        const body = encodeURIComponent(
-                            `Name: ${firstName} ${lastName}\n` +
-                            `Company: ${companyName || 'N/A'}\n` +
-                            `Email: ${email}\n` +
-                            `Message: ${message || 'N/A'}`
-                        );
-                        
-                        window.location.href = `mailto:taylorleap1@gmail.com?subject=${subject}&body=${body}`;
-                        
-                        submitBtn.textContent = 'Send';
-                        submitBtn.disabled = false;
-                        
-                        alert('Opening your email client to send the message...');
-                    }, 10000);
+                    const firstName = form.querySelector('[name="firstName"]').value;
+                    const lastName = form.querySelector('[name="lastName"]').value;
+                    const companyName = form.querySelector('[name="companyName"]').value;
+                    const email = form.querySelector('[name="email"]').value;
+                    const message = form.querySelector('[name="message"]').value;
                     
-                    // Clear timeout if form submits successfully
-                    window.addEventListener('beforeunload', function() {
-                        clearTimeout(timeoutId);
-                    });
+                    const subject = encodeURIComponent('Portfolio Contact - ' + firstName + ' ' + lastName);
+                    const body = encodeURIComponent(
+                        'Name: ' + firstName + ' ' + lastName + '\n' +
+                        'Company: ' + (companyName || 'N/A') + '\n' +
+                        'Email: ' + email + '\n\n' +
+                        'Message:\n' + (message || 'No message provided')
+                    );
+                    
+                    window.location.href = 'mailto:taylorleap1@gmail.com?subject=' + subject + '&body=' + body;
+                    
+                    // Optional: Clear form after submission
+                    setTimeout(function() {
+                        form.reset();
+                    }, 500);
                 });
             }
         })();
@@ -1773,12 +1760,7 @@
             </div>
             
             <div class="contact-right">
-                <form class="contact-form" action="https://formsubmit.co/taylorleap1@gmail.com" method="POST">
-                    <!-- Formsubmit Configuration -->
-                    <input type="hidden" name="_subject" value="New Portfolio Contact Form Submission">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="https://taylorleap1-ai.github.io/my-portfolio/index.html#contact">
-                    
+                <form class="contact-form" id="contactForm">
                     <div class="form-row">
                         <div class="form-group">
                             <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
