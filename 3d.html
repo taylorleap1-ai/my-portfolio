@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>3D Models - Taylor Leap</title>
     
     <!-- SEO Meta Tags -->
@@ -50,11 +50,19 @@
             box-sizing: border-box;
         }
 
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: var(--dark-bg);
             color: var(--text-light);
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+            position: relative;
         }
 
         /* Top Navigation */
@@ -629,7 +637,11 @@
 
         @media (max-width: 768px) {
             .top-nav {
+                width: 100%;
+                left: 0;
+                transform: none;
                 padding: 0 1.5rem;
+                border-radius: 0 0 20px 20px;
             }
 
             .nav-links {
