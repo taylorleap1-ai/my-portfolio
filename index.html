@@ -1201,7 +1201,8 @@
 
         /* Critical Mobile Fixes - Override Everything */
         @media (max-width: 768px) {
-            * {
+            html, body {
+                overflow-x: hidden !important;
                 max-width: 100vw !important;
             }
 
@@ -1211,26 +1212,38 @@
                 right: 0 !important;
                 transform: none !important;
                 margin: 0 !important;
+                padding: 0.5rem 1rem !important;
+                justify-content: space-between !important;
             }
 
             .nav-logo {
                 display: block !important;
                 font-size: 1.1rem !important;
+                white-space: nowrap !important;
             }
 
-            .nav-links a,
-            .resume-btn {
-                display: inline-block !important;
+            .nav-links {
+                display: none !important;
+            }
+
+            .nav-links.mobile-open {
+                display: flex !important;
+            }
+
+            .mobile-menu-icon {
+                display: block !important;
+                font-size: 1.5rem !important;
             }
 
             .skills-section,
             .contact-section,
             .footer-section,
             .demo-reel {
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
                 overflow-x: hidden !important;
                 max-width: 100vw !important;
+                box-sizing: border-box !important;
             }
 
             .skills-container,
@@ -1240,11 +1253,26 @@
                 max-width: 100% !important;
                 padding: 0 !important;
                 margin: 0 auto !important;
+                box-sizing: border-box !important;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr !important;
             }
 
             .skill-category {
                 width: 100% !important;
                 max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr !important;
             }
 
             .form-group input,
@@ -1252,6 +1280,11 @@
                 width: 100% !important;
                 max-width: 100% !important;
                 box-sizing: border-box !important;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr !important;
+                text-align: center !important;
             }
 
             .hero-title {
