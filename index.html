@@ -1615,38 +1615,6 @@
             }
         })();
 
-        // Contact Form Handler - Direct mailto
-        (function() {
-            const form = document.getElementById('contactForm');
-            
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const firstName = form.querySelector('[name="firstName"]').value;
-                    const lastName = form.querySelector('[name="lastName"]').value;
-                    const companyName = form.querySelector('[name="companyName"]').value;
-                    const email = form.querySelector('[name="email"]').value;
-                    const message = form.querySelector('[name="message"]').value;
-                    
-                    const subject = encodeURIComponent('Portfolio Contact - ' + firstName + ' ' + lastName);
-                    const body = encodeURIComponent(
-                        'Name: ' + firstName + ' ' + lastName + '\n' +
-                        'Company: ' + (companyName || 'N/A') + '\n' +
-                        'Email: ' + email + '\n\n' +
-                        'Message:\n' + (message || 'No message provided')
-                    );
-                    
-                    window.location.href = 'mailto:taylorleap1@gmail.com?subject=' + subject + '&body=' + body;
-                    
-                    // Optional: Clear form after submission
-                    setTimeout(function() {
-                        form.reset();
-                    }, 500);
-                });
-            }
-        })();
-
         // Scroll to Top Button
         (function() {
             const scrollBtn = document.getElementById('scrollToTop');
@@ -1764,7 +1732,7 @@
             </div>
             
             <div class="contact-right">
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" action="https://formspree.io/f/taylorleap1@gmail.com" method="POST">
                     <div class="form-row">
                         <div class="form-group">
                             <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
@@ -1779,7 +1747,7 @@
                     </div>
                     
                     <div class="form-group full-width">
-                        <input type="email" id="email" name="email" placeholder="Email Address" required>
+                        <input type="email" id="email" name="_replyto" placeholder="Email Address" required>
                     </div>
 
                     <div class="form-group full-width">
