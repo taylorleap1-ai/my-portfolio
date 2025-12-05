@@ -1611,6 +1611,51 @@
             }
         })();
 
+        // Contact Form Handler with fallback
+        (function() {
+            const form = document.querySelector('.contact-form');
+            
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    const submitBtn = form.querySelector('.form-submit');
+                    submitBtn.textContent = 'Sending...';
+                    submitBtn.disabled = true;
+                    
+                    // Set a timeout to detect if submission hangs
+                    const timeoutId = setTimeout(function() {
+                        // If form hasn't submitted after 10 seconds, use mailto fallback
+                        e.preventDefault();
+                        
+                        const firstName = form.querySelector('[name="firstName"]').value;
+                        const lastName = form.querySelector('[name="lastName"]').value;
+                        const companyName = form.querySelector('[name="companyName"]').value;
+                        const email = form.querySelector('[name="email"]').value;
+                        const message = form.querySelector('[name="message"]').value;
+                        
+                        const subject = encodeURIComponent('Portfolio Contact Form Submission');
+                        const body = encodeURIComponent(
+                            `Name: ${firstName} ${lastName}\n` +
+                            `Company: ${companyName || 'N/A'}\n` +
+                            `Email: ${email}\n` +
+                            `Message: ${message || 'N/A'}`
+                        );
+                        
+                        window.location.href = `mailto:taylorleap1@gmail.com?subject=${subject}&body=${body}`;
+                        
+                        submitBtn.textContent = 'Send';
+                        submitBtn.disabled = false;
+                        
+                        alert('Opening your email client to send the message...');
+                    }, 10000);
+                    
+                    // Clear timeout if form submits successfully
+                    window.addEventListener('beforeunload', function() {
+                        clearTimeout(timeoutId);
+                    });
+                });
+            }
+        })();
+
         // Scroll to Top Button
         (function() {
             const scrollBtn = document.getElementById('scrollToTop');
