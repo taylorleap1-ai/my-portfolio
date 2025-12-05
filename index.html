@@ -1615,6 +1615,35 @@
             }
         })();
 
+        // Contact Form Button State Handler
+        (function() {
+            const form = document.querySelector('.contact-form');
+            const submitBtn = form ? form.querySelector('.form-submit') : null;
+            
+            if (form && submitBtn) {
+                form.addEventListener('submit', function(e) {
+                    // Change button to "Sending..."
+                    submitBtn.textContent = 'Sending...';
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.7';
+                    submitBtn.style.cursor = 'not-allowed';
+                });
+                
+                // Listen for form submission completion
+                window.addEventListener('beforeunload', function() {
+                    submitBtn.textContent = 'Sent';
+                    submitBtn.style.opacity = '1';
+                    
+                    // Reset after 3 seconds
+                    setTimeout(function() {
+                        submitBtn.textContent = 'Send';
+                        submitBtn.disabled = false;
+                        submitBtn.style.cursor = 'pointer';
+                    }, 3000);
+                });
+            }
+        })();
+
         // Scroll to Top Button
         (function() {
             const scrollBtn = document.getElementById('scrollToTop');
