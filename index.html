@@ -167,14 +167,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
 
-        @media (max-width: 768px) {
-            .top-nav {
-                width: calc(100% - 2rem);
-                padding: 0 1.5rem;
-                border-radius: 0 0 20px 20px;
-            }
-        }
-
         .top-nav.dark-bg {
             background: #242424;
         }
@@ -958,30 +950,43 @@
                 width: 100%;
                 left: 0;
                 transform: none;
-                padding: 0 1.5rem;
+                padding: 0 1rem;
                 border-radius: 0 0 20px 20px;
+                height: auto;
+                min-height: 60px;
+            }
+
+            .nav-logo {
+                font-size: 1.1rem;
             }
 
             .nav-links {
                 display: none;
+                font-size: 0.8rem;
             }
 
             .mobile-menu-icon {
                 display: block;
             }
 
+            .resume-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.7rem;
+            }
+
             .hero {
-                padding: 3rem 1.5rem 6rem;
+                padding: 3rem 1rem 6rem;
             }
 
             .hero-title {
-                font-size: 3rem;
+                font-size: 3.5rem;
                 letter-spacing: 3px;
             }
 
             .hero-subtitle {
-                font-size: 0.85rem;
+                font-size: 1.1rem;
                 letter-spacing: 2px;
+                margin-top: 1rem;
             }
 
             .hero-image-container {
@@ -996,7 +1001,8 @@
             }
 
             .skills-section {
-                padding: 6rem 1.5rem 5rem;
+                padding: 6rem 1rem 5rem;
+                overflow-x: hidden;
             }
 
             .skills-title {
@@ -1007,6 +1013,7 @@
             .skills-container {
                 grid-template-columns: 1fr;
                 gap: 2rem;
+                width: 100%;
             }
 
             .category-title {
@@ -1015,10 +1022,11 @@
 
             .skill-card {
                 padding: 0.75rem;
+                width: 100%;
             }
 
             .demo-reel {
-                padding: 6rem 1.5rem;
+                padding: 6rem 1rem;
                 margin-top: -3rem;
                 margin-bottom: -3rem;
             }
@@ -1026,6 +1034,7 @@
             .demo-reel h2 {
                 font-size: 2.2rem;
                 letter-spacing: 3px;
+                margin-bottom: 3rem;
             }
 
             .video-wrapper {
@@ -1033,7 +1042,12 @@
             }
 
             .contact-section {
-                padding: 8rem 1.5rem 6rem;
+                padding: 8rem 1rem 6rem;
+                overflow-x: hidden;
+            }
+
+            .contact-container {
+                width: 100%;
             }
 
             .contact-left h2 {
@@ -1046,13 +1060,15 @@
             }
 
             .footer-section {
-                padding: 5rem 1.5rem 3rem;
+                padding: 5rem 1rem 3rem;
+                overflow-x: hidden;
             }
 
             .footer-container {
                 grid-template-columns: 1fr;
                 gap: 2rem;
                 text-align: center;
+                width: 100%;
             }
 
             .footer-logo {
@@ -1101,25 +1117,33 @@
                 width: 100%;
                 left: 0;
                 transform: none;
-                padding: 0 1rem;
+                padding: 0 0.8rem;
                 border-radius: 0 0 15px 15px;
+                height: auto;
             }
 
             .nav-logo {
-                font-size: 1rem;
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+            }
+
+            .resume-btn {
+                padding: 0.35rem 0.6rem;
+                font-size: 0.65rem;
             }
 
             .hero {
-                padding: 2rem 1rem 5rem;
+                padding: 2rem 0.8rem 5rem;
             }
 
             .hero-title {
-                font-size: 2rem;
+                font-size: 2.5rem;
                 letter-spacing: 2px;
             }
 
             .hero-subtitle {
-                font-size: 0.75rem;
+                font-size: 0.95rem;
+                margin-top: 1rem;
             }
 
             .hero-image-container {
@@ -1134,7 +1158,7 @@
             }
 
             .skills-section {
-                padding: 5rem 1rem 4rem;
+                padding: 5rem 0.8rem 4rem;
             }
 
             .skills-title {
@@ -1142,15 +1166,17 @@
             }
 
             .demo-reel {
-                padding: 5rem 1rem;
+                padding: 5rem 0.8rem;
+                margin-bottom: -2rem;
             }
 
             .demo-reel h2 {
                 font-size: 1.75rem;
+                margin-bottom: 2.5rem;
             }
 
             .contact-section {
-                padding: 7rem 1rem 5rem;
+                padding: 7rem 0.8rem 5rem;
             }
 
             .contact-left h2 {
@@ -1158,7 +1184,11 @@
             }
 
             .footer-section {
-                padding: 4rem 1rem 2rem;
+                padding: 4rem 0.8rem 2rem;
+            }
+
+            .footer-logo {
+                font-size: 2rem;
             }
 
             .scroll-to-top {
