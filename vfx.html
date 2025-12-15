@@ -484,7 +484,11 @@
         <span class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); navigateLightbox(-1)">‹</span>
         <div class="lightbox-video-container" onclick="event.stopPropagation()">
             <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-            <iframe id="lightbox-video" class="lightbox-video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe id="lightbox-iframe" class="lightbox-video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display: none;"></iframe>
+            <video id="lightbox-video" class="lightbox-video" controls style="display: none;">
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
         <span class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); navigateLightbox(1)">›</span>
     </div>
@@ -509,18 +513,38 @@
 
         function openLightbox(videoSrc) {
             const lightbox = document.getElementById('lightbox');
+            const lightboxIframe = document.getElementById('lightbox-iframe');
             const lightboxVideo = document.getElementById('lightbox-video');
+            
             currentVideoIndex = videos.indexOf(videoSrc);
-            lightboxVideo.src = videoSrc;
+            
+            // Check if it's an embed URL (YouTube, Vimeo) or a direct MP4 file
+            if (videoSrc.includes('youtube.com') || videoSrc.includes('youtu.be') || videoSrc.includes('vimeo.com')) {
+                // Show iframe for embeds
+                lightboxIframe.src = videoSrc;
+                lightboxIframe.style.display = 'block';
+                lightboxVideo.style.display = 'none';
+            } else if (videoSrc.endsWith('.mp4') || videoSrc.endsWith('.webm') || videoSrc.endsWith('.ogg')) {
+                // Show video element for direct video files
+                lightboxVideo.querySelector('source').src = videoSrc;
+                lightboxVideo.load();
+                lightboxIframe.style.display = 'none';
+                lightboxVideo.style.display = 'block';
+            }
+            
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
         function closeLightbox() {
             const lightbox = document.getElementById('lightbox');
+            const lightboxIframe = document.getElementById('lightbox-iframe');
             const lightboxVideo = document.getElementById('lightbox-video');
+            
             lightbox.classList.remove('active');
-            lightboxVideo.src = ''; // Stop video playback
+            lightboxIframe.src = ''; // Stop iframe playback
+            lightboxVideo.pause();
+            lightboxVideo.querySelector('source').src = ''; // Stop video playback
             document.body.style.overflow = 'auto';
         }
 
@@ -531,8 +555,24 @@
             } else if (currentVideoIndex >= videos.length) {
                 currentVideoIndex = 0;
             }
+            
+            const videoSrc = videos[currentVideoIndex];
+            const lightboxIframe = document.getElementById('lightbox-iframe');
             const lightboxVideo = document.getElementById('lightbox-video');
-            lightboxVideo.src = videos[currentVideoIndex];
+            
+            // Check if it's an embed URL or MP4
+            if (videoSrc.includes('youtube.com') || videoSrc.includes('youtu.be') || videoSrc.includes('vimeo.com')) {
+                lightboxIframe.src = videoSrc;
+                lightboxIframe.style.display = 'block';
+                lightboxVideo.style.display = 'none';
+                lightboxVideo.pause();
+            } else if (videoSrc.endsWith('.mp4') || videoSrc.endsWith('.webm') || videoSrc.endsWith('.ogg')) {
+                lightboxVideo.querySelector('source').src = videoSrc;
+                lightboxVideo.load();
+                lightboxIframe.style.display = 'none';
+                lightboxVideo.style.display = 'block';
+                lightboxIframe.src = '';
+            }
         }
 
         // Close lightbox on Escape key, navigate with arrow keys
