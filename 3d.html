@@ -434,7 +434,7 @@
             font-size: 3rem;
             color: var(--text-light);
             cursor: pointer;
-            background: rgba(36, 36, 36, 0.8);
+            background: rgba(36, 36, 36, 0.9);
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -442,22 +442,23 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            border: 1px solid rgba(251, 245, 243, 0.2);
+            border: 2px solid rgba(251, 245, 243, 0.3);
             user-select: none;
-            z-index: 10;
+            z-index: 1001;
         }
 
         .modal-nav:hover {
             background: var(--accent-red);
             transform: translateY(-50%) scale(1.1);
+            border-color: var(--accent-red);
         }
 
         .modal-prev {
-            left: -5rem;
+            left: 1rem;
         }
 
         .modal-next {
-            right: -5rem;
+            right: 1rem;
         }
 
         .modal-title {
@@ -883,6 +884,7 @@
     <!-- Modal -->
     <div class="model-modal" id="modelModal" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-nav modal-prev" onclick="navigateModel(-1)">‹</button>
             <div class="modal-inner">
                 <button class="modal-close" onclick="closeModal()">&times;</button>
                 <h2 class="modal-title" id="modalTitle">Model Name</h2>
@@ -937,8 +939,8 @@
                         </model-viewer>
                     </div>
                 </div>
-                <button class="modal-nav modal-next" onclick="navigateModel(1)">›</button>
             </div>
+            <button class="modal-nav modal-next" onclick="navigateModel(1)">›</button>
         </div>
     </div>
 
