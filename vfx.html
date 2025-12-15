@@ -270,6 +270,39 @@
             transform: rotate(90deg);
         }
 
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: var(--text-light);
+            cursor: pointer;
+            background: rgba(36, 36, 36, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(251, 245, 243, 0.2);
+            user-select: none;
+            z-index: 1001;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--accent-red);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 2rem;
+        }
+
+        .lightbox-next {
+            right: 2rem;
+        }
+
         /* Responsive Design */
         /* Critical Mobile Fixes */
         @media (max-width: 768px) {
@@ -439,16 +472,36 @@
 
     <!-- Lightbox Modal for Videos -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); navigateLightbox(-1)">‹</span>
         <div class="lightbox-video-container" onclick="event.stopPropagation()">
             <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
             <iframe id="lightbox-video" class="lightbox-video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
+        <span class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); navigateLightbox(1)">›</span>
     </div>
 
     <script>
+        let currentVideoIndex = 0;
+        const videos = [];
+
+        // Collect all video card sources on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.vfx-card');
+            cards.forEach(card => {
+                const onclick = card.getAttribute('onclick');
+                if (onclick) {
+                    const videoSrc = onclick.match(/openLightbox\('([^']+)'\)/);
+                    if (videoSrc && videoSrc[1]) {
+                        videos.push(videoSrc[1]);
+                    }
+                }
+            });
+        });
+
         function openLightbox(videoSrc) {
             const lightbox = document.getElementById('lightbox');
             const lightboxVideo = document.getElementById('lightbox-video');
+            currentVideoIndex = videos.indexOf(videoSrc);
             lightboxVideo.src = videoSrc;
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -462,10 +515,25 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Close lightbox on Escape key
+        function navigateLightbox(direction) {
+            currentVideoIndex += direction;
+            if (currentVideoIndex < 0) {
+                currentVideoIndex = videos.length - 1;
+            } else if (currentVideoIndex >= videos.length) {
+                currentVideoIndex = 0;
+            }
+            const lightboxVideo = document.getElementById('lightbox-video');
+            lightboxVideo.src = videos[currentVideoIndex];
+        }
+
+        // Close lightbox on Escape key, navigate with arrow keys
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                navigateLightbox(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateLightbox(1);
             }
         });
 

@@ -280,6 +280,38 @@
             transform: rotate(90deg);
         }
 
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: var(--text-light);
+            cursor: pointer;
+            background: rgba(36, 36, 36, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(251, 245, 243, 0.2);
+            user-select: none;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--accent-red);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 2rem;
+        }
+
+        .lightbox-next {
+            right: 2rem;
+        }
+
         /* Responsive Design */
         /* Critical Mobile Fixes */
         @media (max-width: 768px) {
@@ -504,14 +536,31 @@
 
     <!-- Lightbox Modal -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close">&times;</span>
-        <img src="" alt="Concept Art Full View" class="lightbox-content" id="lightbox-img">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); navigateLightbox(-1)">‹</span>
+        <img src="" alt="Concept Art Full View" class="lightbox-content" id="lightbox-img" onclick="event.stopPropagation()">
+        <span class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); navigateLightbox(1)">›</span>
     </div>
 
     <script>
+        let currentImageIndex = 0;
+        const images = [];
+
+        // Collect all concept card images on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.concept-card');
+            cards.forEach(card => {
+                const img = card.querySelector('.concept-image');
+                if (img) {
+                    images.push(img.src);
+                }
+            });
+        });
+
         function openLightbox(imageSrc) {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
+            currentImageIndex = images.indexOf(imageSrc);
             lightboxImg.src = imageSrc;
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -523,10 +572,25 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Close lightbox on Escape key
+        function navigateLightbox(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            }
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = images[currentImageIndex];
+        }
+
+        // Close lightbox on Escape key, navigate with arrow keys
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                navigateLightbox(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateLightbox(1);
             }
         });
 
