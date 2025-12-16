@@ -70,7 +70,38 @@ Wait 2-3 minutes for GitHub Pages to rebuild. Hard refresh your browser with `Ct
 
 ---
 
-### **2. Add Concept Art Images**
+### **2. Replace Hero Image (Face.png)**
+
+The hero image is the main portrait that appears on the homepage.
+
+**Steps:**
+1. Prepare your new image:
+   - **Recommended size:** 400px wide × 728px tall (or similar tall portrait ratio)
+   - **File format:** PNG with transparent background works best
+   - **File name:** Keep as `Face.png` OR use a new name
+   
+2. Replace the file:
+   - Navigate to `assets/images/`
+   - Replace `Face.png` with your new image
+   
+3. If you use a different filename, update `index.html` (line ~1471):
+   ```html
+   <img src="assets/images/YOUR-NEW-IMAGE.png" alt="Taylor Leap - 3D Modeler, VFX Artist, Motion Designer" class="hero-image">
+   ```
+
+4. Also update the preload tag in `index.html` (line ~35):
+   ```html
+   <link rel="preload" href="assets/images/YOUR-NEW-IMAGE.png" as="image">
+   ```
+
+**Tips:**
+- The image automatically scales, so use high resolution (2x or 3x the display size)
+- PNG format recommended for best quality and transparency
+- Image appears on a red background, so transparent edges look cleanest
+
+---
+
+### **3. Add Concept Art Images**
 
 1. Add image to `assets/images/concept-art/`
 2. Edit `concept.html` and add a new card:
@@ -88,7 +119,25 @@ Wait 2-3 minutes for GitHub Pages to rebuild. Hard refresh your browser with `Ct
 
 ---
 
-### **3. Add 3D Models**
+### **3. Add Concept Art Images**
+
+1. Add image to `assets/images/concept-art/`
+2. Edit `concept.html` and add a new card:
+
+```html
+<div class="concept-card" onclick="openLightbox('assets/images/concept-art/your-image.jpg')">
+    <img src="assets/images/concept-art/your-image.jpg" 
+         alt="Description" 
+         class="concept-image" 
+         loading="lazy" 
+         width="350" 
+         height="350">
+</div>
+```
+
+---
+
+### **4. Add 3D Models**
 
 1. Export your model as `.glb` format
 2. Add file to `assets/models/`
@@ -115,7 +164,34 @@ Wait 2-3 minutes for GitHub Pages to rebuild. Hard refresh your browser with `Ct
 
 ---
 
-### **4. Add VFX Videos**
+### **4. Add 3D Models**
+
+1. Export your model as `.glb` format
+2. Add file to `assets/models/`
+3. Replace a placeholder card in `3d.html`:
+
+```html
+<div class="model-card" onclick="openModel('Model Name', 'assets/models/your-model.glb')">
+    <div class="model-preview">
+        <div class="loading-spinner"></div>
+        <div class="preview-placeholder">Click to View</div>
+        <div class="preview-thumbnail">
+            <model-viewer src="assets/models/your-model.glb" 
+                         auto-rotate 
+                         camera-controls 
+                         touch-action="none" 
+                         disable-zoom 
+                         loading="lazy">
+            </model-viewer>
+        </div>
+    </div>
+    <h3 class="model-title">Model Name</h3>
+</div>
+```
+
+---
+
+### **5. Add VFX Videos**
 
 #### **For YouTube/Vimeo Videos:**
 1. Get the embed URL (YouTube: click Share → Embed, copy the `src` URL)
@@ -152,7 +228,44 @@ Wait 2-3 minutes for GitHub Pages to rebuild. Hard refresh your browser with `Ct
 
 ---
 
-### **5. Update Skills Section**
+### **5. Add VFX Videos**
+
+#### **For YouTube/Vimeo Videos:**
+1. Get the embed URL (YouTube: click Share → Embed, copy the `src` URL)
+2. Edit `vfx.html` and update a placeholder card:
+
+```html
+<div class="vfx-card" onclick="openLightbox('https://www.youtube.com/embed/VIDEO_ID')">
+    <img src="https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg" 
+         alt="Video Title" 
+         class="vfx-thumbnail" 
+         loading="lazy">
+    <div class="vfx-info">
+        <h3 class="vfx-name">Project Name</h3>
+        <p class="vfx-type">Compositing</p>
+    </div>
+</div>
+```
+
+#### **For MP4 Files:**
+1. Add video file to `assets/videos/` (create folder if needed)
+2. Update card in `vfx.html`:
+
+```html
+<div class="vfx-card" onclick="openLightbox('assets/videos/your-video.mp4')">
+    <div class="vfx-thumbnail" style="background: linear-gradient(135deg, #242424 0%, #3a3a3a 100%); display: flex; align-items: center; justify-content: center; color: #666; font-size: 1rem;">
+        Preview
+    </div>
+    <div class="vfx-info">
+        <h3 class="vfx-name">Project Name</h3>
+        <p class="vfx-type">Motion Graphics</p>
+    </div>
+</div>
+```
+
+---
+
+### **6. Update Skills Section**
 
 Edit `index.html` around line ~1520. Each skill has:
 - **Logo:** Place in `assets/images/logos/`
@@ -184,7 +297,39 @@ Edit `index.html` around line ~1520. Each skill has:
 
 ---
 
-### **6. Update Resume**
+### **6. Update Skills Section**
+
+Edit `index.html` around line ~1520. Each skill has:
+- **Logo:** Place in `assets/images/logos/`
+- **Name:** Skill name
+- **Dots:** Visual proficiency (10 dots = 100%)
+
+```html
+<div class="skill-card">
+    <img src="assets/images/logos/software-logo.png" alt="Software Name" loading="lazy" width="48" height="48">
+    <span class="skill-name">Software Name</span>
+    <div class="skill-bar">
+        <div class="skill-fill" style="width: 80%">
+            <span class="skill-dots">●●●●●●●●○○</span>
+        </div>
+    </div>
+</div>
+```
+
+**Proficiency Guide:**
+- 10 dots (●●●●●●●●●●) = Expert (100%)
+- 8 dots (●●●●●●●●○○) = Advanced (80%)
+- 5 dots (●●●●●○○○○○) = Intermediate (50%)
+- 3 dots (●●●○○○○○○○) = Beginner (30%)
+
+**Color coding** (automatic):
+- Green: 65-100%
+- Yellow: 50-64%
+- Red: 15-49%
+
+---
+
+### **7. Update Resume**
 
 1. Replace file at `assets/documents/Resume/Taylor Leap Resume.pdf`
 2. Keep the same filename or update the link in `index.html`:
@@ -196,7 +341,19 @@ Edit `index.html` around line ~1520. Each skill has:
 
 ---
 
-### **7. Change Demo Reel Video**
+### **7. Update Resume**
+
+1. Replace file at `assets/documents/Resume/Taylor Leap Resume.pdf`
+2. Keep the same filename or update the link in `index.html`:
+
+```html
+<!-- Find line ~1420 -->
+<a href="assets/documents/Resume/Taylor Leap Resume.pdf" class="resume-btn">RÉSUMÉ</a>
+```
+
+---
+
+### **8. Change Demo Reel Video**
 
 Edit `index.html` around line ~1710:
 
