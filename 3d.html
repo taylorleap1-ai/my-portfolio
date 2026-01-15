@@ -480,37 +480,38 @@
 
         .modal-nav {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 3rem;
+            top: 1.5rem;
+            bottom: auto;
+            transform: none;
+            font-size: 1.5rem;
             color: var(--text-light);
             cursor: pointer;
-            background: rgba(36, 36, 36, 0.9);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+            background: var(--accent-red);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            border: 2px solid rgba(251, 245, 243, 0.3);
+            border: none;
             user-select: none;
             z-index: 1001;
+            box-shadow: 0 2px 8px rgba(215, 38, 61, 0.3);
         }
 
         .modal-nav:hover {
-            background: var(--accent-red);
-            transform: translateY(-52%);
-            border-color: var(--accent-red);
+            background: #B01E31;
+            transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(215, 38, 61, 0.4);
         }
 
         .modal-prev {
-            left: -5.5rem;
+            left: 1.5rem;
         }
 
         .modal-next {
-            right: -5.5rem;
+            right: 1.5rem;
         }
 
         .modal-title {
