@@ -874,16 +874,15 @@
     <div class="threed-page">
         <h1 class="threed-title">3D MODELS</h1>
         <div class="models-grid">
-            <!-- Video Card as first grid item -->
-            <div class="media-card" onclick="openMediaLightbox('assets/images/videos/LeapT_CharacterRender_version2.mp4', 'video')" tabindex="0" role="button" aria-label="View LeapT Character Render video">
+            <!-- Unified Card List (video and models) -->
+            <div class="media-card" onclick="openUnifiedModal(0)" tabindex="0" role="button" aria-label="View LeapT Character Render video">
                 <video class="media-thumbnail" src="assets/images/videos/LeapT_CharacterRender_version2.mp4" muted loop playsinline preload="metadata"></video>
                 <div class="media-info">
                     <h3 class="media-name">LeapT Character Render</h3>
                     <p class="media-type">3D Animation</p>
                 </div>
             </div>
-            <!-- 3D Model Cards -->
-            <div class="model-card" onclick="openModel('Ghost Can', 'assets/models/GhostCan.glb')" tabindex="0" role="button" aria-label="View Ghost Can 3D model">
+            <div class="model-card" onclick="openUnifiedModal(1)" tabindex="0" role="button" aria-label="View Ghost Can 3D model">
                 <div class="model-preview">
                     <div class="loading-spinner"></div>
                     <div class="preview-placeholder">Click to View</div>
@@ -893,7 +892,7 @@
                 </div>
                 <h3 class="model-title">Ghost Can</h3>
             </div>
-            <div class="model-card" onclick="openModel('The Renovator', 'assets/models/TheRenovator.glb')" tabindex="0" role="button" aria-label="View The Renovator 3D model">
+            <div class="model-card" onclick="openUnifiedModal(2)" tabindex="0" role="button" aria-label="View The Renovator 3D model">
                 <div class="model-preview">
                     <div class="loading-spinner"></div>
                     <div class="preview-placeholder">Click to View</div>
@@ -916,30 +915,16 @@
                     </div>
                 </div>
                 <!-- Modal for 3D Model Viewer -->
-                <div class="model-modal" id="modelModal">
+                <div class="model-modal" id="unifiedModal">
                     <div class="modal-content" onclick="event.stopPropagation()">
-                        <span class="modal-close" onclick="closeModal(event)">&times;</span>
+                        <span class="modal-close" onclick="closeUnifiedModal(event)">&times;</span>
                         <div class="modal-inner">
-                            <h2 class="modal-title" id="modalTitle"></h2>
-                            <div class="viewer-container">
-                                <div id="viewerLoading" class="loading-spinner hidden"></div>
-                                <model-viewer id="modelViewer" src="" auto-rotate camera-controls touch-action="none" disable-zoom style="width:100%;height:400px;background:#222;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);" alt="3D Model Viewer"></model-viewer>
-                            </div>
-                            <div class="viewer-actions" style="display:flex;gap:1rem;margin-top:1rem;align-items:center;">
-                                <button class="action-btn" id="rotateBtn" onclick="toggleAutoRotate()" title="Toggle Auto-Rotate"></button>
-                                <button class="action-btn" id="likeBtn" onclick="toggleLike()" title="Like"></button>
-                                <button class="action-btn" onclick="resetCamera()" title="Reset Camera">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                </button>
-                                <button class="action-btn" onclick="takeScreenshot()" title="Download Screenshot">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2.05 7.05A10 10 0 0 1 12 2v0a10 10 0 0 1 9.95 5.05"/></svg>
-                                </button>
-                                <button class="action-btn modal-nav modal-prev" onclick="navigateModel(-1)" title="Previous Model">&#8592;</button>
-                                <button class="action-btn modal-nav modal-next" onclick="navigateModel(1)" title="Next Model">&#8594;</button>
-                            </div>
-                            <div class="viewer-controls-hint" style="margin-top:1rem;color:#aaa;">
-                                <span>Drag to rotate. Scroll to zoom. Shift+←/→ to switch models. R to reset. Space to toggle auto-rotate.</span>
-                            </div>
+                            <h2 class="modal-title" id="unifiedModalTitle"></h2>
+                            <div id="unifiedModalBody"></div>
+                            <div class="viewer-actions" id="unifiedModalActions" style="display:flex;gap:1rem;margin-top:1rem;align-items:center;"></div>
+                            <button class="action-btn modal-nav modal-prev" id="unifiedModalPrev" onclick="navigateUnified(-1)" title="Previous">&#8592;</button>
+                            <button class="action-btn modal-nav modal-next" id="unifiedModalNext" onclick="navigateUnified(1)" title="Next">&#8594;</button>
+                            <div class="viewer-controls-hint" id="unifiedModalHint" style="margin-top:1rem;color:#aaa;"></div>
                         </div>
                     </div>
                 </div>
@@ -987,10 +972,31 @@
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 
     <script>
+        // Unified modal state
         let autoRotateEnabled = true;
         let isLiked = false;
-        let currentModelIndex = 0;
-        const models = [];
+        let currentUnifiedIndex = 0;
+        // List of all items (video, models, etc)
+        const unifiedItems = [
+            {
+                type: 'video',
+                name: 'LeapT Character Render',
+                path: 'assets/images/videos/LeapT_CharacterRender_version2.mp4',
+                mediaType: '3D Animation'
+            },
+            {
+                type: 'model',
+                name: 'Ghost Can',
+                path: 'assets/models/GhostCan.glb',
+                mediaType: '3D Model'
+            },
+            {
+                type: 'model',
+                name: 'The Renovator',
+                path: 'assets/models/TheRenovator.glb',
+                mediaType: '3D Model'
+            }
+        ];
 
         // Show/hide loading indicator
         function showLoading() {
@@ -1034,44 +1040,68 @@
             });
         });
 
-        function openModel(name, path) {
-            const modal = document.getElementById('modelModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modelViewer = document.getElementById('modelViewer');
-            
-            console.log('Opening model:', name, 'Path:', path);
-            
-            // Find current model index
-            currentModelIndex = models.findIndex(m => m.name === name && m.path === path);
-            if (currentModelIndex === -1) currentModelIndex = 0;
-            
-            modalTitle.textContent = name;
-            showLoading();
-            modelViewer.setAttribute('src', path);
+
+        function openUnifiedModal(index) {
+            currentUnifiedIndex = index;
+            const modal = document.getElementById('unifiedModal');
+            const title = document.getElementById('unifiedModalTitle');
+            const body = document.getElementById('unifiedModalBody');
+            const actions = document.getElementById('unifiedModalActions');
+            const hint = document.getElementById('unifiedModalHint');
+            const item = unifiedItems[currentUnifiedIndex];
+            // Reset
+            body.innerHTML = '';
+            actions.innerHTML = '';
+            hint.innerHTML = '';
+            title.textContent = item.name;
+            // Show correct content
+            if (item.type === 'model') {
+                // 3D Model
+                body.innerHTML = `<div class='viewer-container'><div id='viewerLoading' class='loading-spinner hidden'></div><model-viewer id='modelViewer' src='${item.path}' auto-rotate camera-controls touch-action='none' disable-zoom style='width:100%;height:400px;background:#222;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);' alt='3D Model Viewer'></model-viewer></div>`;
+                actions.innerHTML = `
+                    <button class='action-btn' id='rotateBtn' onclick='toggleAutoRotate()' title='Toggle Auto-Rotate'></button>
+                    <button class='action-btn' id='likeBtn' onclick='toggleLike()' title='Like'></button>
+                    <button class='action-btn' onclick='resetCamera()' title='Reset Camera'>
+                        <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><polyline points='12 6 12 12 16 14'/></svg>
+                    </button>
+                    <button class='action-btn' onclick='takeScreenshot()' title='Download Screenshot'>
+                        <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='3'/><path d='M2.05 7.05A10 10 0 0 1 12 2v0a10 10 0 0 1 9.95 5.05'/></svg>
+                    </button>
+                `;
+                hint.innerHTML = `<span>Drag to rotate. Scroll to zoom. Shift+←/→ to switch. R to reset. Space to toggle auto-rotate.</span>`;
+                // Set up model viewer events
+                setTimeout(() => {
+                    const modelViewer = document.getElementById('modelViewer');
+                    showLoading();
+                    modelViewer.addEventListener('load', function() { hideLoading(); });
+                    modelViewer.addEventListener('error', function() { hideLoading(); });
+                    document.getElementById('rotateBtn').innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+                    document.getElementById('likeBtn').innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+                    document.getElementById('likeBtn').classList.remove('liked');
+                }, 0);
+            } else if (item.type === 'video') {
+                // Video
+                body.innerHTML = `<div class='viewer-container' style='display:flex;align-items:center;justify-content:center;background:#222;'><video id='unifiedModalVideo' src='${item.path}' controls style='max-width:100%;max-height:400px;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);background:#222;'></video></div>`;
+                actions.innerHTML = '';
+                hint.innerHTML = `<span>Use ←/→ to switch. Video controls below.</span>`;
+            }
             modal.classList.add('active');
-            autoRotateEnabled = true;
-            isLiked = false;
-            document.getElementById('rotateBtn').innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-            document.getElementById('likeBtn').innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
-            document.getElementById('likeBtn').classList.remove('liked');
-            
-            // Remove old event listeners and add new ones
-            const newViewer = modelViewer.cloneNode(true);
-            modelViewer.parentNode.replaceChild(newViewer, modelViewer);
-            
-            newViewer.addEventListener('load', function() {
-                console.log('Model loaded successfully:', path);
-                hideLoading();
-            });
-            
-            newViewer.addEventListener('error', function(event) {
-                console.warn('Model may not have loaded correctly:', path);
-                console.warn('OBJ files require MTL material files to display properly');
-                hideLoading();
-            });
-            
-            // Update references
-            document.getElementById('modelViewer').setAttribute('id', 'modelViewer');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeUnifiedModal(event) {
+            const modal = document.getElementById('unifiedModal');
+            if (!event || event.target === modal || event.target.classList.contains('modal-close')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function navigateUnified(direction) {
+            currentUnifiedIndex += direction;
+            if (currentUnifiedIndex < 0) currentUnifiedIndex = unifiedItems.length - 1;
+            if (currentUnifiedIndex >= unifiedItems.length) currentUnifiedIndex = 0;
+            openUnifiedModal(currentUnifiedIndex);
         }
 
         function closeModal(event) {
@@ -1096,15 +1126,17 @@
 
         function resetCamera() {
             const modelViewer = document.getElementById('modelViewer');
-            modelViewer.cameraOrbit = '0deg 75deg 105%';
-            modelViewer.fieldOfView = '45deg';
+            if (modelViewer) {
+                modelViewer.cameraOrbit = '0deg 75deg 105%';
+                modelViewer.fieldOfView = '45deg';
+            }
         }
 
         function toggleAutoRotate() {
             const modelViewer = document.getElementById('modelViewer');
             const rotateBtn = document.getElementById('rotateBtn');
+            if (!modelViewer || !rotateBtn) return;
             autoRotateEnabled = !autoRotateEnabled;
-            
             if (autoRotateEnabled) {
                 modelViewer.setAttribute('auto-rotate', '');
                 rotateBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
@@ -1116,8 +1148,8 @@
 
         function toggleLike() {
             const likeBtn = document.getElementById('likeBtn');
+            if (!likeBtn) return;
             isLiked = !isLiked;
-            
             if (isLiked) {
                 likeBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
                 likeBtn.classList.add('liked');
@@ -1129,8 +1161,8 @@
 
         function takeScreenshot() {
             const modelViewer = document.getElementById('modelViewer');
-            const modalTitle = document.getElementById('modalTitle').textContent;
-            
+            const modalTitle = document.getElementById('unifiedModalTitle').textContent;
+            if (!modelViewer) return;
             modelViewer.toBlob({ idealAspect: true }).then(blob => {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
@@ -1143,63 +1175,55 @@
 
         // Close modal with Escape key and navigate with arrows
         document.addEventListener('keydown', function(event) {
-            const modal = document.getElementById('modelModal');
-            
-            if (event.key === 'Escape') {
-                closeModal();
-                return;
-            }
-            
-            // Keyboard navigation only when modal is open
+            const modal = document.getElementById('unifiedModal');
             if (!modal.classList.contains('active')) return;
-            
-            // Navigate between models with Shift + Arrow keys
-            if (event.shiftKey && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
-                event.preventDefault();
-                navigateModel(event.key === 'ArrowLeft' ? -1 : 1);
+            if (event.key === 'Escape') {
+                closeUnifiedModal();
                 return;
             }
-            
-            const modelViewer = document.getElementById('modelViewer');
-            if (!modelViewer) return;
-            
-            const orbitString = modelViewer.getCameraOrbit();
-            const orbit = {
-                theta: parseFloat(orbitString.theta) || 0,
-                phi: parseFloat(orbitString.phi) || 75,
-                radius: parseFloat(orbitString.radius) || 105
-            };
-            
-            switch(event.key) {
-                case 'ArrowLeft':
-                    event.preventDefault();
-                    orbit.theta -= 10;
-                    modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius}%`;
-                    break;
-                case 'ArrowRight':
-                    event.preventDefault();
-                    orbit.theta += 10;
-                    modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius}%`;
-                    break;
-                case 'ArrowUp':
-                    event.preventDefault();
-                    orbit.phi = Math.max(0, orbit.phi - 10);
-                    modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius}%`;
-                    break;
-                case 'ArrowDown':
-                    event.preventDefault();
-                    orbit.phi = Math.min(180, orbit.phi + 10);
-                    modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius}%`;
-                    break;
-                case ' ':
-                    event.preventDefault();
-                    toggleAutoRotate();
-                    break;
-                case 'r':
-                case 'R':
-                    event.preventDefault();
-                    resetCamera();
-                    break;
+            // Navigate between items with Arrow keys
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                navigateUnified(-1);
+                return;
+            }
+            if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                navigateUnified(1);
+                return;
+            }
+            // Model-specific controls
+            const item = unifiedItems[currentUnifiedIndex];
+            if (item.type === 'model') {
+                const modelViewer = document.getElementById('modelViewer');
+                if (!modelViewer) return;
+                const orbitString = modelViewer.getCameraOrbit();
+                const orbit = {
+                    theta: parseFloat(orbitString.theta) || 0,
+                    phi: parseFloat(orbitString.phi) || 75,
+                    radius: parseFloat(orbitString.radius) || 105
+                };
+                switch(event.key) {
+                    case 'ArrowUp':
+                        event.preventDefault();
+                        orbit.phi = Math.max(0, orbit.phi - 10);
+                        modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius}%`;
+                        break;
+                    case 'ArrowDown':
+                        event.preventDefault();
+                        orbit.phi = Math.min(180, orbit.phi + 10);
+                        modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius}%`;
+                        break;
+                    case ' ':
+                        event.preventDefault();
+                        toggleAutoRotate();
+                        break;
+                    case 'r':
+                    case 'R':
+                        event.preventDefault();
+                        resetCamera();
+                        break;
+                }
             }
         });
 
