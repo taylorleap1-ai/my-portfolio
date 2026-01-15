@@ -823,7 +823,79 @@
     <div class="threed-page">
         <h1 class="threed-title">3D MODELS</h1>
         
+        <!-- Media Grid for Images and Videos -->
+        <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto 4rem auto;">
+            <!-- Example Image Card -->
+            <!--
+            <div class="media-card" onclick="openMediaLightbox('assets/images/concept-art/example-image.jpg', 'image')">
+                <img class="media-thumbnail" src="assets/images/concept-art/example-image.jpg" alt="Example Image" style="width:100%;height:250px;object-fit:cover;display:block;" />
+                <div class="media-info">
+                    <h3 class="media-name">Example Image</h3>
+                    <p class="media-type">Concept Art</p>
+                </div>
+            </div>
+            -->
+            <!-- Example Video Card -->
+            <!--
+            <div class="media-card" onclick="openMediaLightbox('assets/images/videos/example-video.mp4', 'video')">
+                <video class="media-thumbnail" src="assets/images/videos/example-video.mp4" muted loop playsinline preload="metadata" style="width:100%;height:250px;object-fit:cover;display:block;"></video>
+                <div class="media-info">
+                    <h3 class="media-name">Example Video</h3>
+                    <p class="media-type">Animation</p>
+                </div>
+            </div>
+            -->
+        </div>
+
         <div class="models-grid">
+                <!-- Lightbox Modal for Images and Videos -->
+                <div class="lightbox" id="mediaLightbox" onclick="closeMediaLightbox()" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.95);z-index:2000;justify-content:center;align-items:center;padding:2rem;">
+                    <div class="lightbox-media-container" onclick="event.stopPropagation()" style="position:relative;width:90%;max-width:1200px;max-height:90vh;display:flex;justify-content:center;align-items:center;">
+                        <span class="lightbox-close" onclick="closeMediaLightbox()" style="position:absolute;top:1rem;right:1rem;font-size:2rem;color:#FBF5F3;cursor:pointer;background:rgba(36,36,36,0.8);width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:1001;">&times;</span>
+                        <img id="lightbox-image" src="" alt="Media" style="max-width:100%;max-height:80vh;display:none;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);" />
+                        <video id="lightbox-media-video" controls style="max-width:100%;max-height:80vh;display:none;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                            <source src="" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <script>
+                // Lightbox logic for media (images/videos)
+                function openMediaLightbox(src, type) {
+                    const lightbox = document.getElementById('mediaLightbox');
+                    const img = document.getElementById('lightbox-image');
+                    const vid = document.getElementById('lightbox-media-video');
+                    if (type === 'image') {
+                        img.src = src;
+                        img.style.display = 'block';
+                        vid.style.display = 'none';
+                        vid.pause();
+                    } else if (type === 'video') {
+                        vid.querySelector('source').src = src;
+                        vid.load();
+                        vid.style.display = 'block';
+                        img.style.display = 'none';
+                    }
+                    lightbox.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+                function closeMediaLightbox() {
+                    const lightbox = document.getElementById('mediaLightbox');
+                    const img = document.getElementById('lightbox-image');
+                    const vid = document.getElementById('lightbox-media-video');
+                    lightbox.style.display = 'none';
+                    img.src = '';
+                    vid.pause();
+                    vid.querySelector('source').src = '';
+                    document.body.style.overflow = 'auto';
+                }
+                // Optional: Close on Escape key
+                document.addEventListener('keydown', function(e) {
+                    if (document.getElementById('mediaLightbox').style.display === 'flex') {
+                        if (e.key === 'Escape') closeMediaLightbox();
+                    }
+                });
+                </script>
             <div class="model-card" onclick="openModel('Ghost Can', 'assets/models/GhostCan.glb')" tabindex="0" role="button" aria-label="View Ghost Can 3D model">
                 <div class="model-preview">
                     <div class="loading-spinner"></div>
