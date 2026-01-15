@@ -825,25 +825,12 @@
         
         <!-- Media Grid for Images and Videos -->
         <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto 4rem auto;">
-            <div class="media-card" onclick="openMediaLightbox('assets/images/videos/HeadExplosion.mp4', 'video')">
-                <video class="media-thumbnail" src="assets/images/videos/HeadExplosion.mp4" muted loop playsinline preload="metadata" style="width:100%;height:250px;object-fit:cover;display:block;"></video>
+            <!-- LeapT Character Render Video Card -->
+            <div class="media-card" onclick="openMediaLightbox('assets/images/videos/LeapT_CharacterRender_version2.mp4', 'video')">
+                <video class="media-thumbnail" src="assets/images/videos/LeapT_CharacterRender_version2.mp4" muted loop playsinline preload="metadata" style="width:100%;height:250px;object-fit:cover;display:block;"></video>
                 <div class="media-info">
-                    <h3 class="media-name">Head Explosion</h3>
-                    <p class="media-type">Compositing</p>
-                </div>
-            </div>
-            <div class="media-card" onclick="openMediaLightbox('assets/images/videos/LeapT_Logo_Version1.mp4', 'video')">
-                <video class="media-thumbnail" src="assets/images/videos/LeapT_Logo_Version1.mp4" muted loop playsinline preload="metadata" style="width:100%;height:250px;object-fit:cover;display:block;"></video>
-                <div class="media-info">
-                    <h3 class="media-name">LeapT Logo Animation</h3>
-                    <p class="media-type">Motion Graphics</p>
-                </div>
-            </div>
-            <div class="media-card" onclick="openMediaLightbox('assets/images/videos/RFG_Internship_TAYLORL_DD1D_COMP_Main_v004.mp4', 'video')">
-                <video class="media-thumbnail" src="assets/images/videos/RFG_Internship_TAYLORL_DD1D_COMP_Main_v004.mp4" muted loop playsinline preload="metadata" style="width:100%;height:250px;object-fit:cover;display:block;"></video>
-                <div class="media-info">
-                    <h3 class="media-name">RFG Internship Comp</h3>
-                    <p class="media-type">Visual Effects</p>
+                    <h3 class="media-name">LeapT Character Render</h3>
+                    <p class="media-type">3D Animation</p>
                 </div>
             </div>
         </div>
@@ -908,6 +895,17 @@
                 <h3 class="model-title">Ghost Can</h3>
             </div>
 
+            <div class="model-card" onclick="openModel('Model Placeholder 1', 'assets/models/placeholder1.glb')" tabindex="0" role="button" aria-label="View Model Placeholder 1 3D model">
+                <div class="model-preview">
+                    <div class="loading-spinner"></div>
+                    <div class="preview-placeholder">Coming Soon</div>
+                    <div class="preview-thumbnail">
+                        <!-- Add your model file here: assets/models/placeholder1.glb -->
+                    </div>
+                </div>
+                <h3 class="model-title">Model Placeholder 1</h3>
+            </div>
+
             <div class="model-card" onclick="openModel('The Renovator', 'assets/models/TheRenovator.glb')" tabindex="0" role="button" aria-label="View The Renovator 3D model">
                 <div class="model-preview">
                     <div class="loading-spinner"></div>
@@ -918,17 +916,7 @@
                 </div>
                 <h3 class="model-title">The Renovator</h3>
             </div>
-        </div>
-    </div>
 
-    <!-- Modal -->
-    <div class="model-modal" id="modelModal" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-nav modal-prev" onclick="navigateModel(-1)">‹</button>
-            <div class="modal-inner">
-                <button class="modal-close" onclick="closeModal()">&times;</button>
-                <h2 class="modal-title" id="modalTitle">Model Name</h2>
-                <div class="viewer-wrapper">
                     <div class="viewer-controls-hint">
                         <span class="control-icon">🖱️</span>
                         <span class="control-text">Left Click Drag to rotate • Scroll to zoom • Right Click Drag to pan</span>
