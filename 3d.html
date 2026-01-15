@@ -874,8 +874,17 @@
     <div class="threed-page">
         <h1 class="threed-title">3D MODELS</h1>
         <div class="models-grid">
+            <!-- Video Card as first grid item -->
+            <div class="media-card" onclick="openMediaLightbox('assets/images/videos/LeapT_CharacterRender_version2.mp4', 'video')" tabindex="0" role="button" aria-label="View LeapT Character Render video">
+                <video class="media-thumbnail" src="assets/images/videos/LeapT_CharacterRender_version2.mp4" muted loop playsinline preload="metadata"></video>
+                <div class="media-info">
+                    <h3 class="media-name">LeapT Character Render</h3>
+                    <p class="media-type">3D Animation</p>
+                </div>
+            </div>
+            <!-- 3D Model Cards -->
             <div class="model-card" onclick="openModel('Ghost Can', 'assets/models/GhostCan.glb')" tabindex="0" role="button" aria-label="View Ghost Can 3D model">
-                <div class="model-preview">
+                <div class="model-preview" style="pointer-events: none;">
                     <div class="loading-spinner"></div>
                     <div class="preview-placeholder">Click to View</div>
                     <div class="preview-thumbnail">
@@ -884,9 +893,8 @@
                 </div>
                 <h3 class="model-title">Ghost Can</h3>
             </div>
-
             <div class="model-card" onclick="openModel('The Renovator', 'assets/models/TheRenovator.glb')" tabindex="0" role="button" aria-label="View The Renovator 3D model">
-                <div class="model-preview">
+                <div class="model-preview" style="pointer-events: none;">
                     <div class="loading-spinner"></div>
                     <div class="preview-placeholder">Click to View</div>
                     <div class="preview-thumbnail">
@@ -894,16 +902,6 @@
                     </div>
                 </div>
                 <h3 class="model-title">The Renovator</h3>
-            </div>
-        </div>
-        <!-- Media Grid for Images and Videos (now below models) -->
-        <div class="media-grid">
-            <div class="media-card" onclick="openMediaLightbox('assets/images/videos/LeapT_CharacterRender_version2.mp4', 'video')">
-                <video class="media-thumbnail" src="assets/images/videos/LeapT_CharacterRender_version2.mp4" muted loop playsinline preload="metadata"></video>
-                <div class="media-info">
-                    <h3 class="media-name">LeapT Character Render</h3>
-                    <p class="media-type">3D Animation</p>
-                </div>
             </div>
         </div>
                 <!-- Lightbox Modal for Images and Videos -->
