@@ -874,17 +874,38 @@
     <div class="threed-page">
         <h1 class="threed-title">3D MODELS</h1>
         <div class="models-grid">
-                        </div>
-                        <!-- Media Grid for Images and Videos (now below models) -->
-                        <div class="media-grid">
-                            <div class="media-card" onclick="openMediaLightbox('assets/images/videos/LeapT_CharacterRender_version2.mp4', 'video')">
-                                <video class="media-thumbnail" src="assets/images/videos/LeapT_CharacterRender_version2.mp4" muted loop playsinline preload="metadata"></video>
-                                <div class="media-info">
-                                    <h3 class="media-name">LeapT Character Render</h3>
-                                    <p class="media-type">3D Animation</p>
-                                </div>
-                            </div>
-                        </div>
+            <div class="model-card" onclick="openModel('Ghost Can', 'assets/models/GhostCan.glb')" tabindex="0" role="button" aria-label="View Ghost Can 3D model">
+                <div class="model-preview">
+                    <div class="loading-spinner"></div>
+                    <div class="preview-placeholder">Click to View</div>
+                    <div class="preview-thumbnail">
+                        <model-viewer src="assets/models/GhostCan.glb" auto-rotate camera-controls touch-action="none" disable-zoom loading="lazy" alt="Ghost Can 3D model preview"></model-viewer>
+                    </div>
+                </div>
+                <h3 class="model-title">Ghost Can</h3>
+            </div>
+
+            <div class="model-card" onclick="openModel('The Renovator', 'assets/models/TheRenovator.glb')" tabindex="0" role="button" aria-label="View The Renovator 3D model">
+                <div class="model-preview">
+                    <div class="loading-spinner"></div>
+                    <div class="preview-placeholder">Click to View</div>
+                    <div class="preview-thumbnail">
+                        <model-viewer src="assets/models/TheRenovator.glb" auto-rotate camera-controls touch-action="none" disable-zoom loading="lazy" alt="The Renovator 3D model preview"></model-viewer>
+                    </div>
+                </div>
+                <h3 class="model-title">The Renovator</h3>
+            </div>
+        </div>
+        <!-- Media Grid for Images and Videos (now below models) -->
+        <div class="media-grid">
+            <div class="media-card" onclick="openMediaLightbox('assets/images/videos/LeapT_CharacterRender_version2.mp4', 'video')">
+                <video class="media-thumbnail" src="assets/images/videos/LeapT_CharacterRender_version2.mp4" muted loop playsinline preload="metadata"></video>
+                <div class="media-info">
+                    <h3 class="media-name">LeapT Character Render</h3>
+                    <p class="media-type">3D Animation</p>
+                </div>
+            </div>
+        </div>
                 <!-- Lightbox Modal for Images and Videos -->
                 <div class="lightbox" id="mediaLightbox" onclick="closeMediaLightbox()" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.95);z-index:2000;justify-content:center;align-items:center;padding:2rem;">
                     <div class="lightbox-media-container" onclick="event.stopPropagation()" style="position:relative;width:90%;max-width:1200px;max-height:90vh;display:flex;justify-content:center;align-items:center;">
