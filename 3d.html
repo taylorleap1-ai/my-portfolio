@@ -1057,7 +1057,7 @@
             // Show correct content
             if (item.type === 'model') {
                 // 3D Model
-                body.innerHTML = `<div class='viewer-container'><div id='viewerLoading' class='loading-spinner hidden'></div><model-viewer id='modelViewer' src='${item.path}' auto-rotate camera-controls touch-action='none' disable-zoom style='width:100%;height:400px;background:#222;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);' alt='3D Model Viewer'></model-viewer></div>`;
+                body.innerHTML = `<div class='viewer-container'><div id='viewerLoading' class='loading-spinner hidden'></div><model-viewer id='modelViewer' src='${item.path}' auto-rotate camera-controls touch-action='none' style='width:100%;height:400px;background:#222;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);' alt='3D Model Viewer'></model-viewer></div>`;
                 actions.innerHTML = `
                     <button class='action-btn' id='rotateBtn' onclick='toggleAutoRotate()' title='Toggle Auto-Rotate'></button>
                     <button class='action-btn' id='likeBtn' onclick='toggleLike()' title='Like'></button>
