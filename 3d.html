@@ -1063,6 +1063,19 @@
                 // Set initial loading state
                 preview.classList.add('loading');
             });
+
+            // Handle video thumbnail hover to play/pause
+            const videoCards = document.querySelectorAll('.media-card video');
+            videoCards.forEach(video => {
+                const card = video.closest('.media-card');
+                card.addEventListener('mouseenter', function() {
+                    video.play().catch(e => console.log('Video play failed:', e));
+                });
+                card.addEventListener('mouseleave', function() {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+            });
         });
 
 
