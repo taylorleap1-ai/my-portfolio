@@ -592,6 +592,19 @@
             }
         });
 
+        // Handle video thumbnail hover to play/pause
+        const videoCards = document.querySelectorAll('.vfx-card video');
+        videoCards.forEach(video => {
+            const card = video.closest('.vfx-card');
+            card.addEventListener('mouseenter', function() {
+                video.play().catch(e => console.log('Video play failed:', e));
+            });
+            card.addEventListener('mouseleave', function() {
+                video.pause();
+                video.currentTime = 0;
+            });
+        });
+
         // Mobile Menu Toggle
         (function() {
             const mobileMenuIcon = document.querySelector('.mobile-menu-icon');
