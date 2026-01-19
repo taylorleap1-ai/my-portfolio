@@ -453,65 +453,59 @@
 
         .modal-close {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: var(--accent-red);
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
             color: var(--text-light);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            font-size: 1.5rem;
             cursor: pointer;
+            background: rgba(36, 36, 36, 0.8);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
             transition: all 0.3s ease;
-            z-index: 10;
-            box-shadow: 0 2px 8px rgba(215, 38, 61, 0.3);
+            border: 1px solid rgba(251, 245, 243, 0.2);
+            z-index: 1001;
         }
 
         .modal-close:hover {
-            background: #B01E31;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(215, 38, 61, 0.4);
+            background: var(--accent-red);
+            transform: rotate(90deg);
         }
 
         .modal-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.5rem;
+            font-size: 3rem;
             color: var(--text-light);
             cursor: pointer;
-            background: var(--accent-red);
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            background: rgba(36, 36, 36, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            border: none;
+            border: 1px solid rgba(251, 245, 243, 0.2);
             user-select: none;
             z-index: 1001;
-            box-shadow: 0 2px 8px rgba(215, 38, 61, 0.3);
-            margin-top: 0;
         }
 
         .modal-nav:hover {
-            background: #B01E31;
-            margin-top: -0.5px;
-            box-shadow: 0 4px 12px rgba(215, 38, 61, 0.4);
+            background: var(--accent-red);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .modal-prev {
-            left: -3.5rem;
+            left: 2rem;
         }
 
         .modal-next {
-            right: -3.5rem;
+            right: 2rem;
         }
 
         .modal-title {
